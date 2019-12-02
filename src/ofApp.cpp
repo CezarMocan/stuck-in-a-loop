@@ -59,7 +59,7 @@ void ofApp::draw() {
 void ofApp::startAsControlCenterPressed() {
     ofLogNotice() << init_controlCenterConfig[IC_OSC_PORT];
     
-    client = new NetworkedClientControlCenter(this, stoi(init_regularClientConfig[IC_OSC_PORT]));
+    client = new NetworkedClientControlCenter(this, stoi(init_controlCenterConfig[IC_OSC_PORT]));
     started = true;
 }
 

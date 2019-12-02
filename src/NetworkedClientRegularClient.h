@@ -18,7 +18,7 @@ class NetworkedClientRegularClient : public NetworkedClient {
         NetworkedClientRegularClient(ofApp *app, int oscPort, string controlCenterIp, int controlCenterOscPort);
     
         void update();
-        void sendMessageToHost0(string address);
+        void sendMessageToHost(string address);
 };
 
 #endif /* NetworkedClientRegularClient_h */

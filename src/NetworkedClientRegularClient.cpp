@@ -30,7 +30,7 @@ void NetworkedClientRegularClient::update() {
     }
 }
 
-void NetworkedClientRegularClient::sendMessageToHost0(string address) {
+void NetworkedClientRegularClient::sendMessageToHost(string address) {
     ofxOscMessage m;
     m.setAddress(address);
 //    m.addIntArg( 1 );
