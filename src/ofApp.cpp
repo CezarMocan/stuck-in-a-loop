@@ -6,6 +6,17 @@
 void ofApp::setup(){
     ofSetVerticalSync(true);
     setupGUI();
+    
+    serialManager.listDevices();
+    vector <ofSerialDeviceInfo> deviceList = serialManager.getDeviceList();
+    for (int i = 0; i < deviceList.size(); i++) {
+        ofLogNotice() << deviceList[i].getDeviceID() << " " << deviceList[i].getDeviceName() << " " << deviceList[i].getDevicePath();
+    }
+    if (serialManager.setup()) {
+        ofLogNotice() << "Connected!";
+    }
+    
+    testCounter = 0;
 }
 
 void ofApp::setupGUI() {
@@ -57,6 +68,16 @@ void ofApp::update(){
             testMessageSent = true;
         }
     }
+    
+    if (!serialManager.isInitialized()) return;
+    testCounter++;
+    if (testCounter % 200 == 0) {
+        serialManager.writeByte('i');
+        serialManager.flush();
+    } else if (testCounter % 200 == 100) {
+        serialManager.writeByte('o');
+        serialManager.flush();
+    }
 }
 
 //--------------------------------------------------------------
@@ -87,7 +108,7 @@ void ofApp::startAsRegularClientPressed() {
                                               stoi(init_regularClientConfig[IC_CLIENT_ID])
                                               );
     
-    ((NetworkedClientRegularClient*)client)->registerWithHost();    
+    ((NetworkedClientRegularClient*)client)->registerWithHost();
     started = true;
 }
 

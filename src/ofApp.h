@@ -33,6 +33,7 @@ class ofApp : public ofBaseApp{
     
         bool started = false;
         bool testMessageSent = false;
+        int testCounter = 0;
     
         ofxPanel guiControlCenter;
         ofxButton startControlCenterButton;
@@ -61,4 +62,5 @@ class ofApp : public ofBaseApp{
 		
     private:
         NetworkedClient *client;
+        ofSerial serialManager;
 };
