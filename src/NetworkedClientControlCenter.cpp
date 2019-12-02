@@ -15,16 +15,21 @@ NetworkedClientControlCenter::NetworkedClientControlCenter(ofApp *app, int oscPo
 }
 
 void NetworkedClientControlCenter::update() {
-    ofLogNotice() << "control center update" << oscReceiver.hasWaitingMessages();
     while (oscReceiver.hasWaitingMessages()) {
+        ofLogNotice() << "control center has message";
         ofxOscMessage m;
         oscReceiver.getNextMessage( &m );
                 
         if (m.getAddress().compare("/test") == 0) {
             ofLogNotice() << m.getArgAsString(0);
+        } else if (m.getAddress().compare("/register") == 0) {
+            string clientIp = m.getArgAsString(0);
+            int clientPort = m.getArgAsInt(1);
+            int clientId = m.getArgAsInt(2);
+            ofLogNotice() << "[REGISTERED CLIENT] " << clientId << " | " << clientIp << ":" << clientPort;
         } else {
             
         }
-        
+
     }
 }

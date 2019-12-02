@@ -14,9 +14,13 @@ class NetworkedClientRegularClient : public NetworkedClient {
     public:
         string controlCenterIp;
         int controlCenterOscPort;
+        int clientId;
         
-        NetworkedClientRegularClient(ofApp *app, int oscPort, string controlCenterIp, int controlCenterOscPort);
-    
+        NetworkedClientRegularClient(ofApp *app, int oscPort, string controlCenterIp, int controlCenterOscPort, int clientId);
+
+        bool isRegisteredWithHost;
+        void registerWithHost();
+
         void update();
         void sendMessageToHost(string address);
 };

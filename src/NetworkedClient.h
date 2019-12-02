@@ -23,6 +23,7 @@ class NetworkedClient {
         ClientState cState = UNINITIALIZED;
     
         int localOscPort;
+        string localIpAddress;
         ofxOscReceiver oscReceiver;
     
         ofxOscSender oscSender;
@@ -31,6 +32,8 @@ class NetworkedClient {
         virtual void update();
         bool isControlCenter();
         bool isRegularClient();
+    
+        static string getIp();
 };
 
 #endif /* NetworkedClient_h */

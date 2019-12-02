@@ -9,18 +9,26 @@ void ofApp::setup(){
 }
 
 void ofApp::setupGUI() {
+    // Control center--left side of the GUI
     guiControlCenter.setup("Control Center Start Panel");
     guiControlCenter.setSize(400, 400);
     guiControlCenter.setWidthElements(400);
+    
+    guiControlCenter.add(localIpTextField1.setup("Local IP: " + NetworkedClient::getIp()));
+    
     oscPortControlCenterTextField.addListener(this, &ofApp::changedControlCenterOsc);
     guiControlCenter.add(oscPortControlCenterTextField.setup("OSC Port: ", "Type here..."));
     
     startControlCenterButton.addListener(this, &ofApp::startAsControlCenterPressed);
     guiControlCenter.add(startControlCenterButton.setup("Start"));
     
+    
+    // Regular client--right side of the GUI
     guiRegularClient.setup("Regular Client Start Panel");
     guiRegularClient.setPosition(420, 10);
     guiRegularClient.setSize(400, 400);
+    
+    guiRegularClient.add(localIpTextField2.setup("Local IP: " + NetworkedClient::getIp()));
     
     oscPortRegularClientTextField.addListener(this, &ofApp::changedRegularClientOsc);
     guiRegularClient.add(oscPortRegularClientTextField.setup("OSC Port: ", "Type here..."));
@@ -30,6 +38,9 @@ void ofApp::setupGUI() {
     
     oscPortForControlCenterRegularClientTextField.addListener(this, &ofApp::changedRegularClientHostPort);
     guiRegularClient.add(oscPortForControlCenterRegularClientTextField.setup("Host Port: ", "Type here..."));
+    
+    clientIdRegularClientTextField.addListener(this, &ofApp::changedRegularClientClientId);
+    guiRegularClient.add(clientIdRegularClientTextField.setup("Client Id:", "Type here..."));
     
     startRegularClientButton.addListener(this, &ofApp::startAsRegularClientPressed);
     guiRegularClient.add(startRegularClientButton.setup("Connect"));
@@ -43,7 +54,7 @@ void ofApp::update(){
     if (started) {
         if (client->isRegularClient() && !testMessageSent) {
             ((NetworkedClientRegularClient*)client)->sendMessageToHost("/test");
-//            testMessageSent = true;
+            testMessageSent = true;
         }
     }
 }
@@ -67,13 +78,16 @@ void ofApp::startAsRegularClientPressed() {
     ofLogNotice() << init_regularClientConfig[IC_OSC_PORT] << "\n";
     ofLogNotice() << init_regularClientConfig[IC_HOST_IP] << "\n";
     ofLogNotice() << init_regularClientConfig[IC_HOST_PORT] << "\n";
+    ofLogNotice() << init_regularClientConfig[IC_CLIENT_ID] << "\n";
 
     client = new NetworkedClientRegularClient(this,
                                               stoi(init_regularClientConfig[IC_OSC_PORT]),
                                               init_regularClientConfig[IC_HOST_IP],
-                                              stoi(init_regularClientConfig[IC_HOST_PORT])
+                                              stoi(init_regularClientConfig[IC_HOST_PORT]),
+                                              stoi(init_regularClientConfig[IC_CLIENT_ID])
                                               );
     
+    ((NetworkedClientRegularClient*)client)->registerWithHost();    
     started = true;
 }
 
@@ -91,6 +105,10 @@ void ofApp::changedRegularClientHostIp(string &str) {
 
 void ofApp::changedRegularClientHostPort(string &str) {
     init_regularClientConfig[IC_HOST_PORT] = str;
+}
+
+void ofApp::changedRegularClientClientId(string &str) {
+    init_regularClientConfig[IC_CLIENT_ID] = str;
 }
 
 //--------------------------------------------------------------

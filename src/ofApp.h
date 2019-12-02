@@ -9,6 +9,7 @@ class NetworkedClient;
 const string IC_HOST_IP = "HOST_IP";
 const string IC_HOST_PORT = "HOST_PORT";
 const string IC_OSC_PORT = "OSC_PORT";
+const string IC_CLIENT_ID = "CLIENT_ID";
 
 class ofApp : public ofBaseApp{
     
@@ -37,6 +38,8 @@ class ofApp : public ofBaseApp{
         ofxButton startControlCenterButton;
         ofxTextField oscPortControlCenterTextField;
     
+        ofxTextField localIpTextField1, localIpTextField2;
+    
         void changedControlCenterOsc(string &text);
         map<string, string> init_controlCenterConfig;
     
@@ -47,9 +50,11 @@ class ofApp : public ofBaseApp{
         ofxTextField oscPortRegularClientTextField;
         ofxTextField ipForControlCenterRegularClientTextField;
         ofxTextField oscPortForControlCenterRegularClientTextField;
+        ofxTextField clientIdRegularClientTextField;
         void changedRegularClientOsc(string &text);
         void changedRegularClientHostIp(string &text);
         void changedRegularClientHostPort(string &text);
+        void changedRegularClientClientId(string &text);
         map<string, string> init_regularClientConfig;
     
         void startAsRegularClientPressed();
