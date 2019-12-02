@@ -1,0 +1,21 @@
+//
+//  NetworkedClientControlCenter.h
+//  PComFinal
+//
+//  Created by Cezar Mocan on 12/1/19.
+//
+
+#ifndef NetworkedClientControlCenter_h
+#define NetworkedClientControlCenter_h
+
+#include "NetworkedClient.h"
+
+class NetworkedClientControlCenter : public NetworkedClient {    
+    public:
+        vector<pair<string, int> > clients;
+        
+        NetworkedClientControlCenter(ofApp *app, int oscPort);
+        void update();
+};
+
+#endif /* NetworkedClientControlCenter_h */
