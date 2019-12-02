@@ -15,6 +15,7 @@ NetworkedClientControlCenter::NetworkedClientControlCenter(ofApp *app, int oscPo
 }
 
 void NetworkedClientControlCenter::update() {
+    ofLogNotice() << "control center update" << oscReceiver.hasWaitingMessages();
     while (oscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         oscReceiver.getNextMessage( &m );

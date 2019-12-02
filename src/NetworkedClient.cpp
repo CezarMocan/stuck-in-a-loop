@@ -17,9 +17,7 @@ NetworkedClient::NetworkedClient(ofApp *app, int oscPort) {
     this->oscReceiver.setup(oscPort);
 }
 
-void NetworkedClient::update() {
-    
-}
+void NetworkedClient::update() { }
 
 bool NetworkedClient::isControlCenter() {
     return this->cState == CONTROL_CENTER;

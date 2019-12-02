@@ -18,6 +18,7 @@ NetworkedClientRegularClient::NetworkedClientRegularClient(ofApp *app, int oscPo
 }
 
 void NetworkedClientRegularClient::update() {
+    ofLogNotice() << "regular client update" << oscReceiver.hasWaitingMessages();
     while (oscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         oscReceiver.getNextMessage( &m );
@@ -38,4 +39,5 @@ void NetworkedClientRegularClient::sendMessageToHost(string address) {
     m.addStringArg( "hello" );
 //    m.addFloatArg( ofGetElapsedTimef() );
     oscSender.sendMessage(m);
+    ofLogNotice() << "Sending message to host at address: " << address;
 }

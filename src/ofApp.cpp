@@ -43,7 +43,7 @@ void ofApp::update(){
     if (started) {
         if (client->isRegularClient() && !testMessageSent) {
             ((NetworkedClientRegularClient*)client)->sendMessageToHost("/test");
-            testMessageSent = true;
+//            testMessageSent = true;
         }
     }
 }

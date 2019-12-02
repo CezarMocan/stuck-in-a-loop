@@ -28,7 +28,7 @@ class NetworkedClient {
         ofxOscSender oscSender;
     
         NetworkedClient(ofApp *app, int oscPort);
-        void update();
+        virtual void update();
         bool isControlCenter();
         bool isRegularClient();
 };
