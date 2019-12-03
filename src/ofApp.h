@@ -11,11 +11,13 @@ class NetworkedClient;
 class ofApp : public ofBaseApp{
     
 	public:
+        // oF lifecycle
         void setup();
         void setupGUI();
         void update();
         void draw();
 
+        // oF events
         void keyPressed(int key);
         void keyReleased(int key);
         void mouseMoved(int x, int y );
@@ -32,7 +34,8 @@ class ofApp : public ofBaseApp{
         bool testMessageSent = false;
         int testCounter = 0;
         int clientId = -1;
-    
+  
+        // Pre-start GUI elements
         ofxPanel guiControlCenter;
         ofxButton startControlCenterButton;
         ofxTextField oscPortControlCenterTextField;
@@ -57,6 +60,9 @@ class ofApp : public ofBaseApp{
         map<string, string> init_regularClientConfig;
     
         void startAsRegularClientPressed();
+  
+        // Networking and state management
+        void receivedStateUpdate(VideoChannelState state);
 		
     private:
         NetworkedClient *client;

@@ -146,16 +146,19 @@ void ofApp::changedRegularClientClientId(string &str) {
 }
 
 //--------------------------------------------------------------
+
+void ofApp::receivedStateUpdate(VideoChannelState state) {
+  this->localInstanceManager->updateState(state);
+}
+
+//--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if (client->isRegularClient()) return;
-  if (key == '1') {
-    
-  } else if (key == '2') {
-  
-  } else if (key == '3') {
-  
-  } else if (key == '4') {
-  
+  if (key == '0' || key == '1' || key == '2' || key == '3') {
+    VideoChannelState newState;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(key - '0', newState);
   }
 }
 

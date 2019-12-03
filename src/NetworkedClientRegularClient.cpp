@@ -25,8 +25,15 @@ void NetworkedClientRegularClient::update() {
                 
         if (m.getAddress().compare("/test") == 0) {
             ofLogNotice() << m.getArgAsString(0);
-        } else if (m.getAddress().compare("/register") == 0) {
-            
+        } else if (m.getAddress().compare("/update") == 0) {
+            ofLogNotice() << "Client /update!";
+            VideoChannelState newState;
+            newState.installationState = static_cast<INSTALLATION_STATE>(m.getArgAsInt(0));
+            newState.phoneState = static_cast<PHONE_STATE>(m.getArgAsInt(1));
+            newState.lightState = static_cast<LIGHT_STATE>(m.getArgAsInt(2));
+            newState.characterState = static_cast<CHARACTER_STATE>(m.getArgAsInt(3));
+          
+            this->app->receivedStateUpdate(newState);
         } else {
             
         }

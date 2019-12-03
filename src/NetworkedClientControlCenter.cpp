@@ -34,3 +34,23 @@ void NetworkedClientControlCenter::update() {
 
     }
 }
+
+void NetworkedClientControlCenter::sendStateUpdateToClient(int clientId, VideoChannelState state) {
+    ofxOscSender s;
+    if (clients.find(clientId) == clients.end()) {
+      ofLogWarning() << "sendStateUpdateToClient failed because there is no client with clientId " << clientId;
+      return;
+    }
+  
+    s.setup(clients[clientId].first, clients[clientId].second);
+  
+    ofxOscMessage m;
+    m.setAddress("/update");
+    m.addIntArg(state.installationState);
+    m.addIntArg(state.phoneState);
+    m.addIntArg(state.lightState);
+    m.addIntArg(state.characterState);
+  
+    s.sendMessage(m);
+    ofLogNotice() << "Sent state update to client... | ip: " << clients[clientId].first << " | port: " << clients[clientId].first << " | clientId: " << clientId;
+}

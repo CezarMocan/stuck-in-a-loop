@@ -6,3 +6,31 @@
 //
 
 #include "ControlCenterStateManager.h"
+
+ControlCenterStateManager::ControlCenterStateManager(NetworkedClientControlCenter* networkClient) {
+  this->networkClient = networkClient;
+}
+
+void ControlCenterStateManager::registerClient(int clientId) {
+  VideoChannelState emptyState;
+  clientStates[clientId] = emptyState;
+}
+
+void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelState s) {
+  if (clientStates.find(clientId) == clientStates.end()) {
+    ofLogWarning() << "moveClientToState failed for " << clientId << "because client is not in the map";
+    return;
+  }
+  
+  clientStates[clientId] = s;
+  networkClient->
+}
+
+void ControlCenterStateManager::moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) {
+  VideoChannelState s;
+  s.installationState = i;
+  s.phoneState = p;
+  s.lightState = l;
+  s.characterState = c;
+  moveClientToState(clientId, s);
+}

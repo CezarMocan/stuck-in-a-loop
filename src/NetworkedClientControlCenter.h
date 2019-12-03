@@ -16,6 +16,7 @@ class NetworkedClientControlCenter : public NetworkedClient {
         
         NetworkedClientControlCenter(ofApp *app, int oscPort);
         void update();
+        void sendStateUpdateToClient(int clientId, VideoChannelState state);
 };
 
 #endif /* NetworkedClientControlCenter_h */
