@@ -23,7 +23,7 @@ void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelStat
   }
   
   clientStates[clientId] = s;
-  networkClient->
+  networkClient->sendStateUpdateToClient(clientId, s);
 }
 
 void ControlCenterStateManager::moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) {

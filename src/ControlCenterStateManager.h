@@ -16,13 +16,13 @@
 class ControlCenterStateManager {
   public:
     ControlCenterStateManager(NetworkedClientControlCenter* networkClient);
-    void registerClient(clientId);
+    void registerClient(int clientId);
     void moveClientToState(int clientId, VideoChannelState s);
     void moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c);
   
   private:
     NetworkedClientControlCenter *networkClient;
     map<int, VideoChannelState> clientStates;
-}
+};
 
 #endif /* ControlCenterStateManager_h */

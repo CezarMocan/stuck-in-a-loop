@@ -5,6 +5,9 @@
 //  Created by Cezar Mocan on 12/3/19.
 //
 
+#include "ofMain.h"
+#include <string.h>
+
 #ifndef Constants_h
 #define Constants_h
 

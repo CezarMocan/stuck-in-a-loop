@@ -10,12 +10,7 @@
 
 InstanceStateManager::InstanceStateManager(int clientId) {
     this->clientId = clientId;
-  
-    installationState = IDLE;
-    phoneState = DOWN;
-    lightState = OFF;
-    characterState = ABSENT;
-    
+
     for (int i = 0; i < 4; i++) {
       videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "video/" + to_string(i) + "/m_idle_down_off_absent.mov.mp4";
       videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "video/" + to_string(i) + "/m_idle_down_off_present.mov.mp4";
@@ -43,7 +38,7 @@ void InstanceStateManager::loadVideos() {
 }
 
 ofVideoPlayer InstanceStateManager::getVideoForCurrentState() {
-    return videos[installationState][phoneState][lightState][characterState];
+    return videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
 }
 
 void InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) {
