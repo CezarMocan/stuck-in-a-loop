@@ -60,23 +60,25 @@ void ofApp::setupGUI() {
 //--------------------------------------------------------------
 void ofApp::update(){
     if (started && client != NULL) {
-        client->update();
+      client->update();
+      if (client->isRegularClient() && !testMessageSent) {
+        ((NetworkedClientRegularClient*)client)->sendMessageToHost("/test");
+        testMessageSent = true;
+      }
+      
+      if (localInstanceManager != NULL) {
+        localInstanceManager->update();
+      }
     }
-    if (started) {
-        if (client->isRegularClient() && !testMessageSent) {
-            ((NetworkedClientRegularClient*)client)->sendMessageToHost("/test");
-            testMessageSent = true;
-        }
-    }
-    
+  
     if (!serialManager.isInitialized()) return;
     testCounter++;
     if (testCounter % 200 == 0) {
-        serialManager.writeByte('i');
-        serialManager.flush();
+      serialManager.writeByte('i');
+      serialManager.flush();
     } else if (testCounter % 200 == 100) {
-        serialManager.writeByte('o');
-        serialManager.flush();
+      serialManager.writeByte('o');
+      serialManager.flush();
     }
 }
 
@@ -86,7 +88,8 @@ void ofApp::draw() {
         guiControlCenter.draw();
         guiRegularClient.draw();
     } else if (client->isRegularClient()) {
-        
+      if (localInstanceManager == NULL) return;
+      localInstanceManager->draw();
     } else if (client->isControlCenter()) {
         
     } else {
@@ -107,13 +110,17 @@ void ofApp::startAsRegularClientPressed() {
     ofLogNotice() << init_regularClientConfig[IC_HOST_PORT] << "\n";
     ofLogNotice() << init_regularClientConfig[IC_CLIENT_ID] << "\n";
 
+    clientId = stoi(init_regularClientConfig[IC_CLIENT_ID]);
+  
     client = new NetworkedClientRegularClient(this,
                                               stoi(init_regularClientConfig[IC_OSC_PORT]),
                                               init_regularClientConfig[IC_HOST_IP],
                                               stoi(init_regularClientConfig[IC_HOST_PORT]),
-                                              stoi(init_regularClientConfig[IC_CLIENT_ID])
+                                              clientId
                                               );
-    
+  
+    localInstanceManager = new InstanceStateManager(clientId);
+  
     ((NetworkedClientRegularClient*)client)->registerWithHost();
     started = true;
 }

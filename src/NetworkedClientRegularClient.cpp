@@ -19,7 +19,6 @@ NetworkedClientRegularClient::NetworkedClientRegularClient(ofApp *app, int oscPo
 }
 
 void NetworkedClientRegularClient::update() {
-    ofLogNotice() << "regular client update" << oscReceiver.hasWaitingMessages();
     while (oscReceiver.hasWaitingMessages()) {
         ofxOscMessage m;
         oscReceiver.getNextMessage( &m );

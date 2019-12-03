@@ -10,29 +10,30 @@
 
 #include <stdio.h>
 #include "ofMain.h"
-
-enum INSTALLATION_STATE { IDLE, JANE_CALLING, HAPPY, NEUTRAL, ANGRY, FRUSTRATED, RESIGNED };
-enum PHONE_STATE { DOWN, RINGING, UP };
-enum LIGHT_STATE { OFF, ON };
-enum CHARACTER_STATE { ABSENT, PRESENT, WALK_IN, WALK_OUT };
+#include "Constants.h"
 
 class InstanceStateManager {
     public:
-        InstanceStateManager();
+        InstanceStateManager(int clientId);
         ofVideoPlayer getVideoForCurrentState();
         void updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c);
-        
+  
+        void update();
+        void draw();
+  
     private:
         INSTALLATION_STATE installationState;
         PHONE_STATE phoneState;
         LIGHT_STATE lightState;
         CHARACTER_STATE characterState;
-    
+  
+        int clientId;
         // [clientId][INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]
-        string videoPaths[4][8][5][5][5];
-    
+        string videoPaths[NO_CLIENTS][NO_INSTALLATION_STATES][NO_PHONE_STATES][NO_LIGHT_STATES][NO_CHARACTER_STATES];
         // [INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]
-        ofVideoPlayer videos[8][5][5][5];
+        ofVideoPlayer videos[NO_INSTALLATION_STATES][NO_PHONE_STATES][NO_LIGHT_STATES][NO_CHARACTER_STATES];
+  
+        void loadVideos();
         
 };
 

@@ -10,12 +10,9 @@
 
 #include "ofxOsc.h"
 #include "ofApp.h"
+#include "Constants.h"
 
 using namespace std;
-
-enum ClientState { UNINITIALIZED, CONTROL_CENTER, REGULAR_CLIENT };
-
-//class ofApp;
 
 class NetworkedClient {
     public:

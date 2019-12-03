@@ -3,37 +3,35 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
+#include "InstanceStateManager.h"
+#include "Constants.h"
 
 class NetworkedClient;
-
-const string IC_HOST_IP = "HOST_IP";
-const string IC_HOST_PORT = "HOST_PORT";
-const string IC_OSC_PORT = "OSC_PORT";
-const string IC_CLIENT_ID = "CLIENT_ID";
 
 class ofApp : public ofBaseApp{
     
 	public:
-		void setup();
+        void setup();
         void setupGUI();
-		void update();
-		void draw();
+        void update();
+        void draw();
 
-		void keyPressed(int key);
-		void keyReleased(int key);
-		void mouseMoved(int x, int y );
-		void mouseDragged(int x, int y, int button);
-		void mousePressed(int x, int y, int button);
-		void mouseReleased(int x, int y, int button);
-		void mouseEntered(int x, int y);
-		void mouseExited(int x, int y);
-		void windowResized(int w, int h);
-		void dragEvent(ofDragInfo dragInfo);
-		void gotMessage(ofMessage msg);
+        void keyPressed(int key);
+        void keyReleased(int key);
+        void mouseMoved(int x, int y );
+        void mouseDragged(int x, int y, int button);
+        void mousePressed(int x, int y, int button);
+        void mouseReleased(int x, int y, int button);
+        void mouseEntered(int x, int y);
+        void mouseExited(int x, int y);
+        void windowResized(int w, int h);
+        void dragEvent(ofDragInfo dragInfo);
+        void gotMessage(ofMessage msg);
     
         bool started = false;
         bool testMessageSent = false;
         int testCounter = 0;
+        int clientId = -1;
     
         ofxPanel guiControlCenter;
         ofxButton startControlCenterButton;
@@ -62,5 +60,6 @@ class ofApp : public ofBaseApp{
 		
     private:
         NetworkedClient *client;
+        InstanceStateManager *localInstanceManager;
         ofSerial serialManager;
 };

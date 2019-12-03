@@ -3,13 +3,10 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ofApp::update():ofApp.cpp">
+         contextName = "InstanceStateManager::loadVideos():InstanceStateManager.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "started">
-            </PersistentString>
-            <PersistentString
-               value = "client">
+               value = "videoPaths[clientId][i][j][k][l]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

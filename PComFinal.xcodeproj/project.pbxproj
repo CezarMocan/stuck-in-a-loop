@@ -291,6 +291,7 @@
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceStateManager.cpp; sourceTree = "<group>"; };
 		F70390F42396C0E6009C6E76 /* InstanceStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstanceStateManager.h; sourceTree = "<group>"; };
+		F79FD5972396D83F003519B6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -732,6 +733,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */,
 				F70390F42396C0E6009C6E76 /* InstanceStateManager.h */,
+				F79FD5972396D83F003519B6 /* Constants.h */,
 				44C11793955003765D6C0361 /* NetworkedClient.h */,
 				2FC7070D79AD5857CDE1A2AC /* NetworkedClient.cpp */,
 				D3424A4E2AC31D5E8E529B79 /* NetworkedClientControlCenter.h */,
