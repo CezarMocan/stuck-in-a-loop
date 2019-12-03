@@ -18,6 +18,8 @@ InstanceStateManager::InstanceStateManager(int clientId) {
       videoPaths[i][IDLE][DOWN][OFF][WALK_OUT] = "video/" + to_string(i) + "/m_idle_down_off_walkout.mov.mp4";
       
       videoPaths[i][IDLE][DOWN][ON][ABSENT] = "video/" + to_string(i) + "/m_idle_down_on_absent.mov.mp4";
+      
+      videoPaths[i][IDLE][RINGING][ON][ABSENT] = "video/" + to_string(i) + "/m_idle_ringing_on_absent.mov.mp4";
     }
   
     loadVideos();
