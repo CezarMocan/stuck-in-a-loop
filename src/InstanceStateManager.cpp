@@ -13,7 +13,9 @@ InstanceStateManager::InstanceStateManager() {
     lightState = OFF;
     characterState = ABSENT;
     
-//    videoPaths[0]
+    for (int i = 0; i < 4; i++) {
+        videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "";
+    }
 }
 
 ofVideoPlayer InstanceStateManager::getVideoForCurrentState() {

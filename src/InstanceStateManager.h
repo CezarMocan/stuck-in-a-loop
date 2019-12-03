@@ -29,10 +29,10 @@ class InstanceStateManager {
         CHARACTER_STATE characterState;
     
         // [clientId][INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]
-        string[4][8][5][5][5] videoPaths;
+        string videoPaths[4][8][5][5][5];
     
         // [INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]
-        ofVideoPlayer[8][5][5][5] videos;
+        ofVideoPlayer videos[8][5][5][5];
         
 };
 
