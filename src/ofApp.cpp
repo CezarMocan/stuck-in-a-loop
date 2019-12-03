@@ -85,6 +85,12 @@ void ofApp::draw() {
     if (!started) {
         guiControlCenter.draw();
         guiRegularClient.draw();
+    } else if (client->isRegularClient()) {
+        
+    } else if (client->isControlCenter()) {
+        
+    } else {
+        
     }
 }
 
