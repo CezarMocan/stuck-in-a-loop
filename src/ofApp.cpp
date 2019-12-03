@@ -147,7 +147,16 @@ void ofApp::changedRegularClientClientId(string &str) {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-
+  if (client->isRegularClient()) return;
+  if (key == '1') {
+    
+  } else if (key == '2') {
+  
+  } else if (key == '3') {
+  
+  } else if (key == '4') {
+  
+  }
 }
 
 //--------------------------------------------------------------

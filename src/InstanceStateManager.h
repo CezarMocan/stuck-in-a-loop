@@ -17,15 +17,17 @@ class InstanceStateManager {
         InstanceStateManager(int clientId);
         ofVideoPlayer getVideoForCurrentState();
         void updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c);
+        void updateState(VideoChannelState v);
   
         void update();
         void draw();
   
     private:
-        INSTALLATION_STATE installationState;
-        PHONE_STATE phoneState;
-        LIGHT_STATE lightState;
-        CHARACTER_STATE characterState;
+        VideoChannelState videoChannelState;
+//        INSTALLATION_STATE installationState;
+//        PHONE_STATE phoneState;
+//        LIGHT_STATE lightState;
+//        CHARACTER_STATE characterState;
   
         int clientId;
         // [clientId][INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]

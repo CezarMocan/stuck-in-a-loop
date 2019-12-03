@@ -22,6 +22,13 @@ enum PHONE_STATE { DOWN, RINGING, UP };
 enum LIGHT_STATE { OFF, ON };
 enum CHARACTER_STATE { ABSENT, PRESENT, WALK_IN, WALK_OUT };
 
+struct VideoChannelState {
+  INSTALLATION_STATE installationState = IDLE;
+  PHONE_STATE phoneState = DOWN;
+  LIGHT_STATE lightState = OFF;
+  CHARACTER_STATE characterState = ABSENT;
+}
+
 enum ClientState { UNINITIALIZED, CONTROL_CENTER, REGULAR_CLIENT };
 
 const string IC_HOST_IP = "HOST_IP";

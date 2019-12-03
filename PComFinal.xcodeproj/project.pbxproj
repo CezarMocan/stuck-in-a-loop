@@ -35,6 +35,7 @@
 		E737C089EE8C8AE6A36495EF /* NetworkedClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7070D79AD5857CDE1A2AC /* NetworkedClient.cpp */; };
 		F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */; };
 		F70390F52396C0E6009C6E76 /* InstanceStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */; };
+		F79FD59A23970143003519B6 /* ControlCenterStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -292,6 +293,8 @@
 		F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceStateManager.cpp; sourceTree = "<group>"; };
 		F70390F42396C0E6009C6E76 /* InstanceStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstanceStateManager.h; sourceTree = "<group>"; };
 		F79FD5972396D83F003519B6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCenterStateManager.cpp; sourceTree = "<group>"; };
+		F79FD59923970143003519B6 /* ControlCenterStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlCenterStateManager.h; sourceTree = "<group>"; };
 		F7FBC56859535E597B24BB91 /* NetworkingUtils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = NetworkingUtils.h; path = ../../../addons/ofxOsc/libs/oscpack/src/ip/NetworkingUtils.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -738,6 +741,8 @@
 				2FC7070D79AD5857CDE1A2AC /* NetworkedClient.cpp */,
 				D3424A4E2AC31D5E8E529B79 /* NetworkedClientControlCenter.h */,
 				D9F50E79EF070E11C1F4A9E5 /* NetworkedClientControlCenter.cpp */,
+				F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */,
+				F79FD59923970143003519B6 /* ControlCenterStateManager.h */,
 				DF4DDFA1BC26EFF58123C73B /* NetworkedClientRegularClient.h */,
 				2DE3999846835040FECBB300 /* NetworkedClientRegularClient.cpp */,
 			);
@@ -891,6 +896,7 @@
 				67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */,
 				510CAFE035E576A4E1502D52 /* UdpSocket.cpp in Sources */,
 				62545D179C94265CA1389D4A /* OscOutboundPacketStream.cpp in Sources */,
+				F79FD59A23970143003519B6 /* ControlCenterStateManager.cpp in Sources */,
 				C4782ECC372420ACE0615B74 /* OscPrintReceivedElements.cpp in Sources */,
 				0546D1A38E13BD319CC9755B /* OscReceivedElements.cpp in Sources */,
 				879A251454401BC0B6E4F238 /* OscTypes.cpp in Sources */,

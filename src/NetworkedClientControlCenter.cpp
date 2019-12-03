@@ -27,6 +27,7 @@ void NetworkedClientControlCenter::update() {
             int clientPort = m.getArgAsInt(1);
             int clientId = m.getArgAsInt(2);
             ofLogNotice() << "[REGISTERED CLIENT] " << clientId << " | " << clientIp << ":" << clientPort;
+            clients[clientId] = make_pair(clientIp, clientPort);
         } else {
             
         }

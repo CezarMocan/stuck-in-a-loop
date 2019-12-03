@@ -47,15 +47,22 @@ ofVideoPlayer InstanceStateManager::getVideoForCurrentState() {
 }
 
 void InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) {
-    installationState = i;
-    phoneState = p;
-    lightState = l;
-    characterState = c;
+    VideoChannelState vcs;
+    vcs.installationState = i;
+    vcs.phoneState = p;
+    vcs.lightState = l;
+    vcs.characterState = c;
+    updateState(vcs);  
+}
+
+void InstanceStateManager::updateState(VideoChannelState vcs) {
+    videoChannelState = vcs;
   
     ofVideoPlayer currentVideo = getVideoForCurrentState();
     currentVideo.play();
     currentVideo.setLoopState(OF_LOOP_NORMAL);
 }
+
 
 void InstanceStateManager::update() {
   ofVideoPlayer currentVideo = getVideoForCurrentState();

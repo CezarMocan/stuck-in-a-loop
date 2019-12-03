@@ -12,7 +12,7 @@
 
 class NetworkedClientControlCenter : public NetworkedClient {    
     public:
-        vector<pair<string, int> > clients;
+        map<int, pair<string, int> > clients;
         
         NetworkedClientControlCenter(ofApp *app, int oscPort);
         void update();
