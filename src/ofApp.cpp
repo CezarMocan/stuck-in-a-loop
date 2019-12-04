@@ -154,41 +154,54 @@ void ofApp::receivedStateUpdate(VideoChannelState state) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if (client->isRegularClient()) return;
-  if (key == '1' || key == '2' || key == '3' || key == '4') {
-    int clientId = key - '1';
+  if (key == '1' || key == 'q' || key == 'a' || key == 'z') {
+    int clientId;
+    switch (key) {
+      case '1': clientId = 0; break;
+      case 'q': clientId = 1; break;
+      case 'a': clientId = 2; break;
+      case 'z': clientId = 3; break;
+    }
+
     VideoChannelState newState;
     newState.phoneState = DOWN;
     newState.lightState = OFF;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == '5' || key == '6' || key == '7' || key == '8') {
-    int clientId = key - '5';
+  if (key == '2' || key == 'w' || key == 's' || key == 'x') {
+    int clientId;
+    switch (key) {
+      case '2': clientId = 0; break;
+      case 'w': clientId = 1; break;
+      case 's': clientId = 2; break;
+      case 'x': clientId = 3; break;
+    }
     
     VideoChannelState newState;
     newState.phoneState = RINGING;
     newState.lightState = ON;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == '9' || key == '0' || key == '-' || key == '=') {
+  if (key == '3' || key == 'e' || key == 'd' || key == 'c') {
     int clientId;
     switch (key) {
-      case '9': clientId = 0; break;
-      case '0': clientId = 1; break;
-      case '-': clientId = 2; break;
-      case '=': clientId = 3; break;
+      case '3': clientId = 0; break;
+      case 'e': clientId = 1; break;
+      case 'd': clientId = 2; break;
+      case 'c': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
     newState.lightState = ON;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'q' || key == 'w' || key == 'e' || key == 'r') {
+  if (key == '4' || key == 'r' || key == 'f' || key == 'v') {
     int clientId;
     switch (key) {
-      case 'q': clientId = 0; break;
-      case 'w': clientId = 1; break;
-      case 'e': clientId = 2; break;
-      case 'r': clientId = 3; break;
+      case '4': clientId = 0; break;
+      case 'r': clientId = 1; break;
+      case 'f': clientId = 2; break;
+      case 'v': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
@@ -196,13 +209,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = WALK_IN;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 't' || key == 'y' || key == 'u' || key == 'i') {
+  if (key == '5' || key == 't' || key == 'g' || key == 'b') {
     int clientId;
     switch (key) {
-      case 't': clientId = 0; break;
-      case 'y': clientId = 1; break;
-      case 'u': clientId = 2; break;
-      case 'i': clientId = 3; break;
+      case '5': clientId = 0; break;
+      case 't': clientId = 1; break;
+      case 'g': clientId = 2; break;
+      case 'b': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
@@ -210,13 +223,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'o' || key == 'p' || key == '[' || key == ']') {
+  if (key == '6' || key == 'y' || key == 'h' || key == 'n') {
     int clientId;
     switch (key) {
-      case 'o': clientId = 0; break;
-      case 'p': clientId = 1; break;
-      case '[': clientId = 2; break;
-      case ']': clientId = 3; break;
+      case '6': clientId = 0; break;
+      case 'y': clientId = 1; break;
+      case 'h': clientId = 2; break;
+      case 'n': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
@@ -224,13 +237,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = WALK_OUT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'a' || key == 's' || key == 'd' || key == 'f') {
+  if (key == '7' || key == 'u' || key == 'j' || key == 'm') {
     int clientId;
     switch (key) {
-      case 'a': clientId = 0; break;
-      case 's': clientId = 1; break;
-      case 'd': clientId = 2; break;
-      case 'f': clientId = 3; break;
+      case '7': clientId = 0; break;
+      case 'u': clientId = 1; break;
+      case 'j': clientId = 2; break;
+      case 'm': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.installationState = HAPPY;
@@ -239,13 +252,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'g' || key == 'h' || key == 'j' || key == 'k') {
+  if (key == '8' || key == 'i' || key == 'k' || key == ',') {
     int clientId;
     switch (key) {
-      case 'g': clientId = 0; break;
-      case 'h': clientId = 1; break;
-      case 'j': clientId = 2; break;
-      case 'k': clientId = 3; break;
+      case '8': clientId = 0; break;
+      case 'i': clientId = 1; break;
+      case 'k': clientId = 2; break;
+      case ',': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.installationState = NEUTRAL;
@@ -254,13 +267,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'l' || key == ';' || key == '\'' || key == '\\') {
+  if (key == '9' || key == 'o' || key == 'l' || key == '.') {
     int clientId;
     switch (key) {
-      case 'l': clientId = 0; break;
-      case ';': clientId = 1; break;
-      case '\'': clientId = 2; break;
-      case '\\': clientId = 3; break;
+      case '9': clientId = 0; break;
+      case 'o': clientId = 1; break;
+      case 'l': clientId = 2; break;
+      case '.': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.installationState = ANGRY;
@@ -269,13 +282,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'z' || key == 'x' || key == 'c' || key == 'v') {
+  if (key == '0' || key == 'p' || key == ';' || key == '/') {
     int clientId;
     switch (key) {
-      case 'z': clientId = 0; break;
-      case 'x': clientId = 1; break;
-      case 'c': clientId = 2; break;
-      case 'v': clientId = 3; break;
+      case '0': clientId = 0; break;
+      case 'p': clientId = 1; break;
+      case ';': clientId = 2; break;
+      case '/': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.installationState = FRUSTRATED;
@@ -284,13 +297,13 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
-  if (key == 'b' || key == 'n' || key == 'm' || key == ',') {
+  if (key == '-' || key == '[' || key == '\'' || key == ']') {
     int clientId;
     switch (key) {
-      case 'b': clientId = 0; break;
-      case 'n': clientId = 1; break;
-      case 'm': clientId = 2; break;
-      case ',': clientId = 3; break;
+      case '-': clientId = 0; break;
+      case '[': clientId = 1; break;
+      case '\'': clientId = 2; break;
+      case ']': clientId = 3; break;
     }
     VideoChannelState newState;
     newState.installationState = RESIGNED;
