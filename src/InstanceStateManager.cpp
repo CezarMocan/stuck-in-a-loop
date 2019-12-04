@@ -31,22 +31,22 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       
       videoPaths[i][IDLE][RINGING][ON][ABSENT] = "video/" + to_string(i) + "/m_idle_ringing_on_absent.mov.mp4";
       
-      videoPaths[i][HAPPY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_happy_full.mov.mp4";
+      videoPaths[i][HAPPY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_happy_full_sub.mov.mp4";
       stateVolatile[HAPPY][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[HAPPY][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[HAPPY][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[HAPPY][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[HAPPY][RINGING][ON][PRESENT].characterState = ABSENT;
       
-      videoPaths[i][NEUTRAL][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_neutral_full.mov.mp4";
+      videoPaths[i][NEUTRAL][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_neutral_full_sub.mov.mp4";
       stateVolatile[NEUTRAL][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[NEUTRAL][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[NEUTRAL][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[NEUTRAL][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[NEUTRAL][RINGING][ON][PRESENT].characterState = ABSENT;
       
-      videoPaths[i][ANGRY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_angry_full.mov.mp4";
+      videoPaths[i][ANGRY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_angry_full_sub.mov.mp4";
       stateVolatile[ANGRY][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[ANGRY][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[ANGRY][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[ANGRY][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[ANGRY][RINGING][ON][PRESENT].characterState = ABSENT;
       
-      videoPaths[i][FRUSTRATED][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_frustrated_full.mov.mp4";
+      videoPaths[i][FRUSTRATED][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_frustrated_full_sub.mov.mp4";
       stateVolatile[FRUSTRATED][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[FRUSTRATED][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[FRUSTRATED][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[FRUSTRATED][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[FRUSTRATED][RINGING][ON][PRESENT].characterState = ABSENT;
@@ -55,6 +55,8 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[RESIGNED][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].characterState = ABSENT;
+      
+      
     }
   
     loadVideos();
