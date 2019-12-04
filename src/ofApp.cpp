@@ -87,10 +87,10 @@ void ofApp::draw() {
     if (!started) {
         guiControlCenter.draw();
         guiRegularClient.draw();
-    } else if (client->isRegularClient()) {
+    } else if (client != NULL && client->isRegularClient()) {
       if (localInstanceManager == NULL) return;
       localInstanceManager->draw();
-    } else if (client->isControlCenter()) {
+    } else if (client != NULL && client->isControlCenter()) {
         
     } else {
         
@@ -154,11 +154,34 @@ void ofApp::receivedStateUpdate(VideoChannelState state) {
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if (client->isRegularClient()) return;
-  if (key == '0' || key == '1' || key == '2' || key == '3') {
+  if (key == '1' || key == '2' || key == '3' || key == '4') {
+    int clientId = key - '1';
+    
+    VideoChannelState newState;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == '5' || key == '6' || key == '7' || key == '8') {
+    int clientId = key - '5';
+    
     VideoChannelState newState;
     newState.phoneState = RINGING;
     newState.lightState = ON;
-    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(key - '0', newState);
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == '9' || key == '0' || key == '-' || key == '=') {
+    int clientId;
+    switch (key) {
+      case '9': clientId = 0; break;
+      case '0': clientId = 1; break;
+      case '-': clientId = 2; break;
+      case '=': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.phoneState = DOWN;
+    newState.lightState = ON;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
 }
 

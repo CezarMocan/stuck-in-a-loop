@@ -11,8 +11,8 @@
 #ifndef Constants_h
 #define Constants_h
 
-#define APP_WIDTH 1344
-#define APP_HEIGHT 756
+#define APP_WIDTH 1280
+#define APP_HEIGHT 720
 
 #define NO_CLIENTS 4
 #define NO_INSTALLATION_STATES 7

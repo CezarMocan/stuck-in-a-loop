@@ -26,11 +26,13 @@ NetworkedClient::NetworkedClient(ofApp *app, int oscPort) {
 void NetworkedClient::update() { }
 
 bool NetworkedClient::isControlCenter() {
-    return this->cState == CONTROL_CENTER;
+  if (this == NULL) return false;
+  return this->cState == CONTROL_CENTER;
 }
 
 bool NetworkedClient::isRegularClient() {
-    return this->cState == REGULAR_CLIENT;
+   if (this == NULL) return false;
+   return this->cState == REGULAR_CLIENT;
 }
 
 string NetworkedClient::getIp() {
