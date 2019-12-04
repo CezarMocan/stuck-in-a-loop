@@ -56,7 +56,23 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[RESIGNED][RINGING][ON][PRESENT].characterState = ABSENT;
       
+      videoPaths[i][JANE_CALLING][DOWN][OFF][WALK_IN] = "video/" + to_string(i) + "/m_danqi_calling_0_enter_and_dial.mov.mp4";
+      stateVolatile[JANE_CALLING][DOWN][OFF][WALK_IN] = true;
+      nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_IN].installationState = JANE_CALLING; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_IN].phoneState = RINGING;
+      nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_IN].lightState = OFF; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_IN].characterState = PRESENT;
       
+      videoPaths[i][JANE_CALLING][RINGING][OFF][PRESENT] = "video/" + to_string(i) + "/m_danqi_calling_1_ringing.mov.mp4";
+      
+      videoPaths[i][JANE_CALLING][UP][OFF][PRESENT] = "video/" + to_string(i) + "/m_danqi_calling_2_monologue_sub.mov.mp4";
+      stateVolatile[JANE_CALLING][UP][OFF][PRESENT] = true;
+      nextStateIfVolatile[JANE_CALLING][UP][OFF][PRESENT].installationState = JANE_CALLING; nextStateIfVolatile[JANE_CALLING][UP][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[JANE_CALLING][UP][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[JANE_CALLING][UP][OFF][PRESENT].characterState = WALK_OUT;
+      
+      videoPaths[i][JANE_CALLING][DOWN][OFF][WALK_OUT] = "video/" + to_string(i) + "/m_danqi_calling_3_hang_up.mov.mp4";
+      stateVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT] = true;
+      nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].installationState = IDLE; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].phoneState = DOWN;
+      nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].lightState = OFF; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].characterState = ABSENT;
+
     }
   
     loadVideos();

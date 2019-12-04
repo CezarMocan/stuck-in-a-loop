@@ -311,6 +311,38 @@ void ofApp::keyPressed(int key){
     newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
+  
+  if (key == '!') {
+    int clientId = 0;
+    VideoChannelState newState;
+    newState.installationState = JANE_CALLING;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = WALK_IN;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  
+  if (key == 'Q') {
+    int clientId = 0;
+    VideoChannelState newState;
+    newState.installationState = JANE_CALLING;
+    newState.phoneState = UP;
+    newState.lightState = OFF;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+
+  if (key == 'A') {
+    int clientId = 0;
+    VideoChannelState newState;
+    newState.installationState = JANE_CALLING;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = WALK_OUT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+
+
 }
 
 //--------------------------------------------------------------
