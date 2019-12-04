@@ -28,7 +28,7 @@ void ofApp::setupGUI() {
     guiControlCenter.add(localIpTextField1.setup("Local IP: " + NetworkedClient::getIp()));
     
     oscPortControlCenterTextField.addListener(this, &ofApp::changedControlCenterOsc);
-    guiControlCenter.add(oscPortControlCenterTextField.setup("OSC Port: ", "Type here..."));
+    guiControlCenter.add(oscPortControlCenterTextField.setup("OSC Port: ", "12345s"));
     
     startControlCenterButton.addListener(this, &ofApp::startAsControlCenterPressed);
     guiControlCenter.add(startControlCenterButton.setup("Start"));
@@ -42,16 +42,16 @@ void ofApp::setupGUI() {
     guiRegularClient.add(localIpTextField2.setup("Local IP: " + NetworkedClient::getIp()));
     
     oscPortRegularClientTextField.addListener(this, &ofApp::changedRegularClientOsc);
-    guiRegularClient.add(oscPortRegularClientTextField.setup("OSC Port: ", "Type here..."));
+    guiRegularClient.add(oscPortRegularClientTextField.setup("OSC Port: ", "20000"));
     
     ipForControlCenterRegularClientTextField.addListener(this, &ofApp::changedRegularClientHostIp);
-    guiRegularClient.add(ipForControlCenterRegularClientTextField.setup("Host IP: ", "Type here..."));
+    guiRegularClient.add(ipForControlCenterRegularClientTextField.setup("Host IP: ", "localhost"));
     
     oscPortForControlCenterRegularClientTextField.addListener(this, &ofApp::changedRegularClientHostPort);
-    guiRegularClient.add(oscPortForControlCenterRegularClientTextField.setup("Host Port: ", "Type here..."));
+    guiRegularClient.add(oscPortForControlCenterRegularClientTextField.setup("Host Port: ", "12345"));
     
     clientIdRegularClientTextField.addListener(this, &ofApp::changedRegularClientClientId);
-    guiRegularClient.add(clientIdRegularClientTextField.setup("Client Id:", "Type here..."));
+    guiRegularClient.add(clientIdRegularClientTextField.setup("Client Id:", "0"));
     
     startRegularClientButton.addListener(this, &ofApp::startAsRegularClientPressed);
     guiRegularClient.add(startRegularClientButton.setup("Connect"));
@@ -156,7 +156,6 @@ void ofApp::keyPressed(int key){
   if (client->isRegularClient()) return;
   if (key == '1' || key == '2' || key == '3' || key == '4') {
     int clientId = key - '1';
-    
     VideoChannelState newState;
     newState.phoneState = DOWN;
     newState.lightState = OFF;
@@ -181,6 +180,123 @@ void ofApp::keyPressed(int key){
     VideoChannelState newState;
     newState.phoneState = DOWN;
     newState.lightState = ON;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'q' || key == 'w' || key == 'e' || key == 'r') {
+    int clientId;
+    switch (key) {
+      case 'q': clientId = 0; break;
+      case 'w': clientId = 1; break;
+      case 'e': clientId = 2; break;
+      case 'r': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = WALK_IN;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 't' || key == 'y' || key == 'u' || key == 'i') {
+    int clientId;
+    switch (key) {
+      case 't': clientId = 0; break;
+      case 'y': clientId = 1; break;
+      case 'u': clientId = 2; break;
+      case 'i': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'o' || key == 'p' || key == '[' || key == ']') {
+    int clientId;
+    switch (key) {
+      case 'o': clientId = 0; break;
+      case 'p': clientId = 1; break;
+      case '[': clientId = 2; break;
+      case ']': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = WALK_OUT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'a' || key == 's' || key == 'd' || key == 'f') {
+    int clientId;
+    switch (key) {
+      case 'a': clientId = 0; break;
+      case 's': clientId = 1; break;
+      case 'd': clientId = 2; break;
+      case 'f': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.installationState = HAPPY;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'g' || key == 'h' || key == 'j' || key == 'k') {
+    int clientId;
+    switch (key) {
+      case 'g': clientId = 0; break;
+      case 'h': clientId = 1; break;
+      case 'j': clientId = 2; break;
+      case 'k': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.installationState = NEUTRAL;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'l' || key == ';' || key == '\'' || key == '\\') {
+    int clientId;
+    switch (key) {
+      case 'l': clientId = 0; break;
+      case ';': clientId = 1; break;
+      case '\'': clientId = 2; break;
+      case '\\': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.installationState = ANGRY;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'z' || key == 'x' || key == 'c' || key == 'v') {
+    int clientId;
+    switch (key) {
+      case 'z': clientId = 0; break;
+      case 'x': clientId = 1; break;
+      case 'c': clientId = 2; break;
+      case 'v': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.installationState = FRUSTRATED;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    newState.characterState = PRESENT;
+    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
+  }
+  if (key == 'b' || key == 'n' || key == 'm' || key == ',') {
+    int clientId;
+    switch (key) {
+      case 'b': clientId = 0; break;
+      case 'n': clientId = 1; break;
+      case 'm': clientId = 2; break;
+      case ',': clientId = 3; break;
+    }
+    VideoChannelState newState;
+    newState.installationState = RESIGNED;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    newState.characterState = PRESENT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
 }

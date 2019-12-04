@@ -24,10 +24,7 @@ class InstanceStateManager {
   
     private:
         VideoChannelState videoChannelState;
-//        INSTALLATION_STATE installationState;
-//        PHONE_STATE phoneState;
-//        LIGHT_STATE lightState;
-//        CHARACTER_STATE characterState;
+        ofVideoPlayer currentlyPlayingVideo;
   
         int clientId;
         // [clientId][INSTALLATION_STATE][PHONE_STATE][LIGHT_STATE][CHARACTER_STATE]

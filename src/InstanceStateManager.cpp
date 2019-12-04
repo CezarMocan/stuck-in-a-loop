@@ -20,6 +20,12 @@ InstanceStateManager::InstanceStateManager(int clientId) {
       videoPaths[i][IDLE][DOWN][ON][ABSENT] = "video/" + to_string(i) + "/m_idle_down_on_absent.mov.mp4";
       
       videoPaths[i][IDLE][RINGING][ON][ABSENT] = "video/" + to_string(i) + "/m_idle_ringing_on_absent.mov.mp4";
+      
+      videoPaths[i][HAPPY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_happy_full.mov.mp4";
+      videoPaths[i][NEUTRAL][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_neutral_full.mov.mp4";
+      videoPaths[i][ANGRY][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_angry_full.mov.mp4";
+      videoPaths[i][FRUSTRATED][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_frustrated_full.mov.mp4";
+      videoPaths[i][RESIGNED][RINGING][ON][PRESENT] = "video/" + to_string(i) + "/m_post_frustrated_full.mov.mp4";
     }
   
     loadVideos();
@@ -53,11 +59,18 @@ void InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGH
 }
 
 void InstanceStateManager::updateState(VideoChannelState vcs) {
-    videoChannelState = vcs;
+    videoChannelState = vcs;  
+    if (currentlyPlayingVideo.isInitialized()) {
+      currentlyPlayingVideo.setVolume(0);
+    }
   
-    ofVideoPlayer currentVideo = getVideoForCurrentState();
-    currentVideo.play();
-    currentVideo.setLoopState(OF_LOOP_NORMAL);
+    ofVideoPlayer oldVideo = currentlyPlayingVideo;
+    currentlyPlayingVideo = getVideoForCurrentState();
+    currentlyPlayingVideo.play();
+    currentlyPlayingVideo.setLoopState(OF_LOOP_NORMAL);
+    currentlyPlayingVideo.setVolume(1);
+  
+    oldVideo.stop();
 }
 
 
