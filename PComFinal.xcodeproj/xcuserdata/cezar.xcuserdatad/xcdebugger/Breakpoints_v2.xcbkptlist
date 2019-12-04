@@ -11,11 +11,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597126613.246971"
+            timestampString = "597138171.090781"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c)"
             landmarkType = "7">
          </BreakpointContent>
@@ -27,11 +27,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597126613.247041"
+            timestampString = "597138171.090886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "InstanceStateManager::loadVideos()"
             landmarkType = "7">
          </BreakpointContent>
@@ -43,11 +43,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597126613.247092"
+            timestampString = "597138171.090942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "InstanceStateManager::updateState(VideoChannelState vcs)"
             landmarkType = "7">
          </BreakpointContent>
