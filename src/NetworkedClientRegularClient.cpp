@@ -61,3 +61,16 @@ void NetworkedClientRegularClient::registerWithHost() {
     oscSender.sendMessage(m);
     ofLogNotice() << "Registering with host... | ip: " << this->localIpAddress << " | port: " << this->localOscPort << " | clientId: " << this->clientId;
 }
+
+void NetworkedClientRegularClient::sendStateUpdateUpstream(VideoChannelState state) {
+    ofxOscMessage m;
+    m.setAddress("/upstreamUpdate");
+    m.addIntArg(this->clientId);
+    m.addIntArg(state.installationState);
+    m.addIntArg(state.phoneState);
+    m.addIntArg(state.lightState);
+    m.addIntArg(state.characterState);
+  
+    oscSender.sendMessage(m);
+    ofLogNotice() << "Sending upsteam state update to host... " << this->clientId;
+}

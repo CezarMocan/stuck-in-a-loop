@@ -3,10 +3,10 @@
 #include "ofMain.h"
 #include "ofxOsc.h"
 #include "ofxGui.h"
-#include "InstanceStateManager.h"
 #include "Constants.h"
 
 class NetworkedClient;
+class InstanceStateManager;
 
 class ofApp : public ofBaseApp{
     
@@ -63,6 +63,8 @@ class ofApp : public ofBaseApp{
   
         // Networking and state management
         void receivedStateUpdate(VideoChannelState state);
+        void sendStateUpdateUpstream(VideoChannelState state);
+        void controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state);
 		
     private:
         NetworkedClient *client;

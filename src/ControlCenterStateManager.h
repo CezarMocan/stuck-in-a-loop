@@ -17,8 +17,8 @@ class ControlCenterStateManager {
   public:
     ControlCenterStateManager(NetworkedClientControlCenter* networkClient);
     void registerClient(int clientId);
-    void moveClientToState(int clientId, VideoChannelState s);
-    void moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c);
+    void moveClientToState(int clientId, VideoChannelState s, bool withNetwork = true);
+    void moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c, bool withNetwork = true);
   
   private:
     NetworkedClientControlCenter *networkClient;

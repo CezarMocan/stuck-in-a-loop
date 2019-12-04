@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "NetworkedClientControlCenter.h"
 #include "NetworkedClientRegularClient.h"
+#include "InstanceStateManager.h"
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -119,7 +120,7 @@ void ofApp::startAsRegularClientPressed() {
                                               clientId
                                               );
   
-    localInstanceManager = new InstanceStateManager(clientId);
+    localInstanceManager = new InstanceStateManager(this, clientId);
   
     ((NetworkedClientRegularClient*)client)->registerWithHost();
     started = true;
@@ -148,7 +149,17 @@ void ofApp::changedRegularClientClientId(string &str) {
 //--------------------------------------------------------------
 
 void ofApp::receivedStateUpdate(VideoChannelState state) {
+  // This should only be called in regular client
   this->localInstanceManager->updateState(state);
+}
+
+void ofApp::sendStateUpdateUpstream(VideoChannelState state) {
+  // This should only be called in regular client
+  ((NetworkedClientRegularClient*)client)->sendStateUpdateUpstream(state);
+}
+
+void ofApp::controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state) {
+  
 }
 
 //--------------------------------------------------------------
@@ -176,10 +187,10 @@ void ofApp::keyPressed(int key){
       case 's': clientId = 2; break;
       case 'x': clientId = 3; break;
     }
-    
     VideoChannelState newState;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = WALK_IN;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
   if (key == '3' || key == 'e' || key == 'd' || key == 'c') {
@@ -192,23 +203,12 @@ void ofApp::keyPressed(int key){
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
-    newState.lightState = ON;
-    ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
-  }
-  if (key == '4' || key == 'r' || key == 'f' || key == 'v') {
-    int clientId;
-    switch (key) {
-      case '4': clientId = 0; break;
-      case 'r': clientId = 1; break;
-      case 'f': clientId = 2; break;
-      case 'v': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.phoneState = DOWN;
     newState.lightState = OFF;
-    newState.characterState = WALK_IN;
+    newState.characterState = WALK_OUT;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
+
+
   if (key == '5' || key == 't' || key == 'g' || key == 'b') {
     int clientId;
     switch (key) {
@@ -217,10 +217,10 @@ void ofApp::keyPressed(int key){
       case 'g': clientId = 2; break;
       case 'b': clientId = 3; break;
     }
+    
     VideoChannelState newState;
-    newState.phoneState = DOWN;
-    newState.lightState = OFF;
-    newState.characterState = PRESENT;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
   if (key == '6' || key == 'y' || key == 'h' || key == 'n') {
@@ -233,8 +233,7 @@ void ofApp::keyPressed(int key){
     }
     VideoChannelState newState;
     newState.phoneState = DOWN;
-    newState.lightState = OFF;
-    newState.characterState = WALK_OUT;
+    newState.lightState = ON;
     ((NetworkedClientControlCenter*)client)->sendStateUpdateToClient(clientId, newState);
   }
   if (key == '7' || key == 'u' || key == 'j' || key == 'm') {
