@@ -165,6 +165,7 @@ void ofApp::controlCenterReceivedRegistration(int clientId) {
 }
 
 void ofApp::controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state) {
+  ofLogNotice() << "controlCenterReceivedUpstreamUpdate";
   globalStateManager->moveClientToState(clientId, state, false);
 }
 

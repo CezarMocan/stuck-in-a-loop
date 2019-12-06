@@ -43,10 +43,7 @@ void NetworkedClientRegularClient::update() {
 void NetworkedClientRegularClient::sendMessageToHost(string address) {
     ofxOscMessage m;
     m.setAddress(address);
-//    m.addIntArg( 1 );
-//    m.addFloatArg( 3.5f );
     m.addStringArg( "hello" );
-//    m.addFloatArg( ofGetElapsedTimef() );
     oscSender.sendMessage(m);
     ofLogNotice() << "Sending message to host at address: " << address;
 }

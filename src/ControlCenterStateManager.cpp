@@ -16,24 +16,51 @@ void ControlCenterStateManager::registerClient(int clientId) {
   clientStates[clientId] = emptyState;
 }
 
-void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelState s, bool withNetwork) {
-  if (clientStates.find(clientId) == clientStates.end()) {
-    ofLogWarning() << "moveClientToState failed for " << clientId << "because client is not in the map";
-    return;
-  }
-  
-  clientStates[clientId] = s;
-  
-  if (withNetwork) {
-    networkClient->sendStateUpdateToClient(clientId, s);
-  }
-}
-
-void ControlCenterStateManager::moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c, bool withNetwork) {
+void ControlCenterStateManager::moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c, bool isDownstream) {
   VideoChannelState s;
   s.installationState = i;
   s.phoneState = p;
   s.lightState = l;
   s.characterState = c;
   moveClientToState(clientId, s);
+}
+
+void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelState s, bool isDownstream) {
+  ofLogNotice() << "Move client to state: " << clientId << " " << isDownstream;
+  if (clientStates.find(clientId) == clientStates.end()) {
+    ofLogWarning() << "moveClientToState failed for " << clientId << "because client is not in the map";
+    return;
+  }
+  
+  VideoChannelState oldState = clientStates[clientId];
+  VideoChannelState newState = s;
+  
+  clientStates[clientId] = newState;
+  
+  if (isDownstream) {
+    networkClient->sendStateUpdateToClient(clientId, s);
+  } else {
+    autoAdvanceGlobalState(clientId, oldState, newState);
+  }
+}
+
+void ControlCenterStateManager::autoAdvanceGlobalState(int clientId, VideoChannelState oldState, VideoChannelState newState) {
+  if (oldState.installationState == HAPPY || oldState.installationState == NEUTRAL || oldState.installationState == ANGRY || oldState.installationState == FRUSTRATED || oldState.installationState == RESIGNED) {
+    int nextClientId = getNextActiveClientId(clientId);
+    
+    VideoChannelState nextClientState;
+    nextClientState.characterState = WALK_IN;
+    moveClientToState(nextClientId, nextClientState);
+  } else if (oldState.characterState == WALK_OUT) {
+  
+  }
+}
+
+int ControlCenterStateManager::getNextActiveClientId(int clientId) {
+  int nextId = clientId + 1;
+  if (clientStates.find(nextId) == clientStates.end()) {
+    return 0;
+  } else {
+    return nextId;
+  }
 }

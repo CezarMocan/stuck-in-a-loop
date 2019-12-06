@@ -26,8 +26,13 @@ void NetworkedClientControlCenter::update() {
             string clientIp = m.getArgAsString(0);
             int clientPort = m.getArgAsInt(1);
             int clientId = m.getArgAsInt(2);
-            ofLogNotice() << "[REGISTERED CLIENT] " << clientId << " | " << clientIp << ":" << clientPort;
+
             clients[clientId] = make_pair(clientIp, clientPort);
+          
+            app->controlCenterReceivedRegistration(clientId);
+          
+            ofLogNotice() << "[REGISTERED CLIENT] " << clientId << " | " << clientIp << ":" << clientPort;
+          
         } else if (m.getAddress().compare("/upstreamUpdate") == 0) {
             int clientId = m.getArgAsInt(0);
             VideoChannelState newState;
