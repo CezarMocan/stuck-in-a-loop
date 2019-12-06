@@ -7,6 +7,7 @@
 
 class NetworkedClient;
 class InstanceStateManager;
+class ControlCenterStateManager;
 
 class ofApp : public ofBaseApp{
     
@@ -62,12 +63,18 @@ class ofApp : public ofBaseApp{
         void startAsRegularClientPressed();
   
         // Networking and state management
+  
+        // Regular clients
         void receivedStateUpdate(VideoChannelState state);
         void sendStateUpdateUpstream(VideoChannelState state);
+  
+        // Control center
+        void controlCenterReceivedRegistration(int clientId);
         void controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state);
 		
     private:
         NetworkedClient *client;
         InstanceStateManager *localInstanceManager;
+        ControlCenterStateManager *globalStateManager;
         ofSerial serialManager;
 };

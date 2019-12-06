@@ -36,6 +36,8 @@ void NetworkedClientControlCenter::update() {
             newState.lightState = static_cast<LIGHT_STATE>(m.getArgAsInt(2));
             newState.characterState = static_cast<CHARACTER_STATE>(m.getArgAsInt(3));
 
+            app->controlCenterReceivedUpstreamUpdate(clientId, newState);
+
             ofLogNotice() << "[CLIENT UPSTREAM UPDATE] " << clientId;
         } else {
             
