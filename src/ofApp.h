@@ -17,6 +17,7 @@ class ofApp : public ofBaseApp{
         void setupGUI();
         void update();
         void draw();
+        void drawWindowsXp();
 
         // oF events
         void keyPressed(int key);
@@ -71,6 +72,11 @@ class ofApp : public ofBaseApp{
         // Control center
         void controlCenterReceivedRegistration(int clientId);
         void controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state);
+  
+        // Windows XP
+        ofImage img_xpBar;
+        ofImage img_xpAutumn, img_xpBliss, img_xpAzul, img_xpWind;
+        ofTrueTypeFont  fnt_tahoma;
 		
     private:
         NetworkedClient *client;

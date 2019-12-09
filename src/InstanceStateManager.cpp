@@ -13,7 +13,8 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
     this->clientId = clientId;
 
     for (int i = 0; i < 4; i++) {
-      videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "video/" + to_string(i) + "/m_idle_down_off_absent.mov.mp4";
+//      videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "video/" + to_string(i) + "/m_idle_down_off_absent.mov.mp4";
+      videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "test.mp4";
       
       videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "video/" + to_string(i) + "/m_idle_down_off_present.mov.mp4";
       
@@ -85,6 +86,7 @@ void InstanceStateManager::loadVideos() {
       for (int k = 0; k < NO_LIGHT_STATES; k++) {
         for (int l = 0; l < NO_CHARACTER_STATES; l++) {
           if (videoPaths[clientId][i][j][k][l].length() == 0) continue;
+          videos[i][j][k][l].setPixelFormat(OF_PIXELS_RGBA);
           videos[i][j][k][l].load(videoPaths[clientId][i][j][k][l]);
         }
       }

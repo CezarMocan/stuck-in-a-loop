@@ -1,3 +1,4 @@
+#include <ctime>
 #include "ofApp.h"
 #include "NetworkedClientControlCenter.h"
 #include "NetworkedClientRegularClient.h"
@@ -19,6 +20,16 @@ void ofApp::setup(){
     }
     
     testCounter = 0;
+  
+  
+    // Windows XP look
+    img_xpBar.load("img/xp-bar.png");
+  
+    img_xpAutumn.load("img/xp-autumn.jpg");
+    img_xpBliss.load("img/xp-bliss.jpg");
+  
+    ofTrueTypeFont::setGlobalDpi(72);
+    fnt_tahoma.load("Tahoma.ttf", 9.5, true, true);
 }
 
 void ofApp::setupGUI() {
@@ -84,8 +95,32 @@ void ofApp::update(){
     }
 }
 
+void ofApp::drawWindowsXp() {
+    // Draw desktop background
+//    img_xpAutumn.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+//    img_xpBliss.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+  
+    // Draw Windows XP task bar
+    img_xpBar.draw(0, APP_HEIGHT - 24, APP_WIDTH, 24);
+  
+  
+    // Draw current time
+    time_t rawtime;
+    struct tm * timeinfo;
+    char buffer[80];
+    time (&rawtime);
+    timeinfo = localtime(&rawtime);
+    strftime(buffer,sizeof(buffer),"%I:%M %p", timeinfo);
+    std::string str(buffer);
+  
+    ofSetColor(225);
+    fnt_tahoma.drawString(str, APP_WIDTH - 47, APP_HEIGHT - 8.5);
+}
+
 //--------------------------------------------------------------
 void ofApp::draw() {
+    ofEnableAlphaBlending();
+  
     if (!started) {
         guiControlCenter.draw();
         guiRegularClient.draw();
@@ -97,6 +132,8 @@ void ofApp::draw() {
     } else {
         
     }
+  
+    drawWindowsXp();
 }
 
 void ofApp::startAsControlCenterPressed() {
