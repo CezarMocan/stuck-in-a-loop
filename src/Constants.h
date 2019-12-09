@@ -30,6 +30,9 @@ struct VideoChannelState {
   PHONE_STATE phoneState = DOWN;
   LIGHT_STATE lightState = OFF;
   CHARACTER_STATE characterState = ABSENT;
+  
+//  VideoChannelState();
+//  VideoChannelState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) : installationState(i), phoneState(p), lightState(l), characterState(c) {};
 };
 
 enum ClientState { UNINITIALIZED, CONTROL_CENTER, REGULAR_CLIENT };

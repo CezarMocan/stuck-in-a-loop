@@ -296,10 +296,11 @@ void ofApp::keyPressed(int key){
       case 'h': clientId = 2; break;
       case 'n': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.phoneState = DOWN;
-    newState.lightState = ON;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.phoneState = DOWN;
+//    newState.lightState = ON;
+//    globalStateManager->moveClientToState(clientId, newState);
+    globalStateManager->userCancelled();
   }
   if (key == '7' || key == 'u' || key == 'j' || key == 'm') {
     int clientId;

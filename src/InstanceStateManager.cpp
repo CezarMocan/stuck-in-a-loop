@@ -40,6 +40,13 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       
       videoPaths[i][IDLE][DOWN][ON][ABSENT] = "new_video/" + to_string(i) + "/idle_down_on_absent.mp4";
       
+      videoPaths[i][IDLE][DOWN][ON][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_on_walk_in.mp4";
+      
+      videoPaths[i][IDLE][DOWN][ON][PRESENT] = "new_video/" + to_string(i) + "/idle_down_on_present_turn_off.mp4";
+      stateVolatile[IDLE][DOWN][ON][PRESENT] = true;
+      nextStateIfVolatile[IDLE][DOWN][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[IDLE][DOWN][ON][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[IDLE][DOWN][ON][PRESENT].lightState = OFF; nextStateIfVolatile[IDLE][DOWN][ON][PRESENT].characterState = PRESENT;
+      
       videoPaths[i][IDLE][RINGING][ON][ABSENT] = "new_video/" + to_string(i) + "/idle_ringing_on_absent.mp4";
 
       videoPaths[i][ACTION_1][RINGING][ON][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_on_walk_in.mp4";

@@ -18,9 +18,24 @@ int StateTimer::addTimer(int msInFuture, int clientId, VideoChannelState state) 
   return this->uidCnt++;
 }
 
+int StateTimer::addTimerAfter(int timerId, int msInFuture, int clientId, VideoChannelState state) {
+  if (timers.find(timerId) == timers.end()) {
+    return addTimer(msInFuture, clientId, state);
+  }
+  
+  int actualMs = ((timers.find(timerId) == timers.end()) ? 0 : (timers[timerId].first - this->currTime)) + msInFuture;
+  return addTimer(actualMs, clientId, state);
+}
+
 void StateTimer::clearTimer(int timerId) {
   if (timers.find(timerId) == timers.end()) return;
   timers.erase(timerId);
+}
+
+void StateTimer::replaceTimer(int timerId, int clientId, VideoChannelState state) {
+  if (timers.find(timerId) == timers.end()) return;
+  timers[timerId].second.first = clientId;
+  timers[timerId].second.second = state;
 }
 
 void StateTimer::clearAllTimers() {

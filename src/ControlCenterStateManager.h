@@ -22,6 +22,7 @@ class ControlCenterStateManager {
     void moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c, bool isDownstream = true);
   
     void userCalledClient(int clientId);
+    void userCancelled();
   
     void timerCallback(int clientId, VideoChannelState s);
   
@@ -38,6 +39,9 @@ class ControlCenterStateManager {
     StateTimer* timer;
   
     int currTime;
+  
+    int currentlyCallingClient = -1;
+    pair <int, int> TIMER_pendingActionForClient = make_pair(-1, -1);
   
 };
 

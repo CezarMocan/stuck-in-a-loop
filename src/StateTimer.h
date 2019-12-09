@@ -17,7 +17,9 @@ class StateTimer {
   public:
     StateTimer(ControlCenterStateManager* callbackManager);
     int addTimer(int msInFuture, int clientId, VideoChannelState state);
+    int addTimerAfter(int timerId, int msInFuture, int clientId, VideoChannelState state);
     void clearTimer(int timerId);
+    void replaceTimer(int timerId, int clientId, VideoChannelState state);
     void clearAllTimers();
     void update(int currentTime);
   
@@ -25,8 +27,8 @@ class StateTimer {
     ControlCenterStateManager* callbackManager;
     int uidCnt;
     int currTime;
-    map <int, pair<float, pair<int, VideoChannelState> > > timers;
-    map <int, pair<float, pair<int, VideoChannelState> > >::iterator timersIt;
+    map <int, pair<int, pair<int, VideoChannelState> > > timers;
+    map <int, pair<int, pair<int, VideoChannelState> > >::iterator timersIt;
 };
 
 #endif /* Timer_h */

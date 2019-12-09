@@ -19,6 +19,16 @@ void ControlCenterStateManager::update(int currTime) {
 
 void ControlCenterStateManager::timerCallback(int clientId, VideoChannelState s) {
   ofLogNotice() << "timeCallbackFor " << clientId;
+  
+  // TIMER_pendingActionForClient
+  if (TIMER_pendingActionForClient.first == clientId &&
+    (s.installationState == ACTION_1 || s.installationState == ACTION_2 || s.installationState == ACTION_3 || s.installationState == ACTION_4) &&
+    s.characterState == WALK_IN &&
+    s.phoneState == RINGING &&
+    s.lightState == ON) {
+    TIMER_pendingActionForClient = make_pair(-1, -1);
+  }
+  
   moveClientToState(clientId, s);
 }
 
@@ -92,6 +102,8 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
     return;
   }
   
+  currentlyCallingClient = clientId;
+  
   if (clientStates[clientId].characterState == ABSENT) {
     VideoChannelState newState;
     newState.phoneState = RINGING;
@@ -110,7 +122,9 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
       nextCurrState.lightState = ON;
       nextCurrState.characterState = WALK_IN;
       
-      timer->addTimer(4500, clientId, nextCurrState);
+      int actionTimerId = timer->addTimer(4500, clientId, nextCurrState);
+      
+      TIMER_pendingActionForClient = make_pair(clientId, actionTimerId);
     }
   } else {
     VideoChannelState newState;
@@ -120,5 +134,28 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
     newState.characterState = PRESENT;
     moveClientToState(clientId, newState);
   }
+}
 
+void ControlCenterStateManager::userCancelled() {
+  if (currentlyCallingClient == -1) return;
+  
+  if (TIMER_pendingActionForClient.first != -1) {
+//    VideoChannelState *stopRingingState = new VideoChannelState(IDLE, DOWN, ON, ABSENT);
+//    moveClientToState(currentlyCallingClient, *stopRingingState);
+    VideoChannelState stopRingingState;
+    stopRingingState.installationState = IDLE; stopRingingState.phoneState = DOWN; stopRingingState.lightState = ON; stopRingingState.characterState = ABSENT;
+    moveClientToState(currentlyCallingClient, stopRingingState);
+
+    VideoChannelState cancelEnterState;
+    cancelEnterState.installationState = IDLE; cancelEnterState.phoneState = DOWN; cancelEnterState.lightState = ON; cancelEnterState.characterState = WALK_IN;
+    timer->replaceTimer(TIMER_pendingActionForClient.second, TIMER_pendingActionForClient.first, cancelEnterState);
+
+    VideoChannelState cancelState;
+    cancelState.installationState = IDLE; cancelState.phoneState = DOWN; cancelState.lightState = ON; cancelState.characterState = PRESENT;
+    timer->addTimerAfter(TIMER_pendingActionForClient.second, 3000, TIMER_pendingActionForClient.first, cancelState);
+    
+    TIMER_pendingActionForClient = make_pair(-1, -1);
+  }
+  
+  currentlyCallingClient == -1;
 }
