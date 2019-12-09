@@ -11,12 +11,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597563317.603676"
+            timestampString = "597566914.603518"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
             endingLineNumber = "137"
-            landmarkName = "InstanceStateManager::getVideoForCurrentState()"
+            landmarkName = "InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -27,28 +27,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597563317.6037689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "InstanceStateManager::loadVideos()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597563317.603848"
+            timestampString = "597566914.603588"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "145"
             endingLineNumber = "145"
-            landmarkName = "InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c)"
+            landmarkName = "InstanceStateManager::updateState(VideoChannelState vcs)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

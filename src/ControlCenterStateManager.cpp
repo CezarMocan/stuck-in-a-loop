@@ -76,6 +76,16 @@ int ControlCenterStateManager::getNextActiveClientId(int clientId) {
   }
 }
 
+int ControlCenterStateManager::getCurrentClientWithCharacter() {
+  for (int i = 0; i < NO_CLIENTS; i++) {
+    if (clientStates.find(i) == clientStates.end()) continue;
+    if (clientStates[i].characterState == PRESENT) return i;
+    if (clientStates[i].characterState == WALK_IN) return i;
+  }
+  
+  return -1;
+}
+
 void ControlCenterStateManager::userCalledClient(int clientId) {
   if (clientStates.find(clientId) == clientStates.end()) {
     ofLogWarning() << "moveClientToState failed for " << clientId << "because client is not in the map";
@@ -88,11 +98,27 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
     newState.lightState = ON;
     moveClientToState(clientId, newState);
     
-    VideoChannelState nextState;
-    
-    timer->addTimer(1000, clientId, nextState);
+    int clientWithCharacter = getCurrentClientWithCharacter();
+    if (clientWithCharacter != -1) {
+      VideoChannelState nextState;
+      nextState.characterState = WALK_OUT;
+      timer->addTimer(500, clientWithCharacter, nextState);
+      
+      VideoChannelState nextCurrState;
+      nextCurrState.installationState = ACTION_3;
+      nextCurrState.phoneState = RINGING;
+      nextCurrState.lightState = ON;
+      nextCurrState.characterState = WALK_IN;
+      
+      timer->addTimer(4500, clientId, nextCurrState);
+    }
   } else {
-    
+    VideoChannelState newState;
+    newState.installationState = DENY_ASSHOLE;
+    newState.phoneState = DOWN;
+    newState.lightState = OFF;
+    newState.characterState = PRESENT;
+    moveClientToState(clientId, newState);
   }
 
 }

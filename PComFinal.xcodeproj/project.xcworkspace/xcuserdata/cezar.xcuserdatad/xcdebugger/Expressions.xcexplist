@@ -3,6 +3,31 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ofApp::controlCenterReceivedUpstreamUpdate(int, VideoChannelState):ofApp.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::userCalledClient(int):ControlCenterStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clientStates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::getCurrentClientWithCharacter():ControlCenterStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clientStates">
+            </PersistentString>
+            <PersistentString
+               value = "clientStates[i].characterState">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "InstanceStateManager::updateState(VideoChannelState):InstanceStateManager.cpp">
          <PersistentStrings>
             <PersistentString

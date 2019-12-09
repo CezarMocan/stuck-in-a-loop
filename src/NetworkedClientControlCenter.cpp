@@ -36,10 +36,10 @@ void NetworkedClientControlCenter::update() {
         } else if (m.getAddress().compare("/upstreamUpdate") == 0) {
             int clientId = m.getArgAsInt(0);
             VideoChannelState newState;
-            newState.installationState = static_cast<INSTALLATION_STATE>(m.getArgAsInt(0));
-            newState.phoneState = static_cast<PHONE_STATE>(m.getArgAsInt(1));
-            newState.lightState = static_cast<LIGHT_STATE>(m.getArgAsInt(2));
-            newState.characterState = static_cast<CHARACTER_STATE>(m.getArgAsInt(3));
+            newState.installationState = static_cast<INSTALLATION_STATE>(m.getArgAsInt(1));
+            newState.phoneState = static_cast<PHONE_STATE>(m.getArgAsInt(2));
+            newState.lightState = static_cast<LIGHT_STATE>(m.getArgAsInt(3));
+            newState.characterState = static_cast<CHARACTER_STATE>(m.getArgAsInt(4));
 
             app->controlCenterReceivedUpstreamUpdate(clientId, newState);
 

@@ -33,6 +33,7 @@ class ControlCenterStateManager {
   
     void autoAdvanceGlobalState(int clientId, VideoChannelState oldState, VideoChannelState newState);
     int getNextActiveClientId(int clientId);
+    int getCurrentClientWithCharacter();
   
     StateTimer* timer;
   
