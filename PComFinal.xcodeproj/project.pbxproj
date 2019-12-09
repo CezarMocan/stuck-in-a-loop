@@ -35,6 +35,9 @@
 		E737C089EE8C8AE6A36495EF /* NetworkedClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2FC7070D79AD5857CDE1A2AC /* NetworkedClient.cpp */; };
 		F285EB3169F1566CA3D93C20 /* ofxPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E112B3AEBEA2C091BF2B40AE /* ofxPanel.cpp */; };
 		F70390F52396C0E6009C6E76 /* InstanceStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */; };
+		F787CF2A239E1098009B37A7 /* StateTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F787CF28239E1098009B37A7 /* StateTimer.cpp */; };
+		F787CF2B239E1098009B37A7 /* StateTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F787CF28239E1098009B37A7 /* StateTimer.cpp */; };
+		F787CF2C239E1098009B37A7 /* StateTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F787CF28239E1098009B37A7 /* StateTimer.cpp */; };
 		F79FD59A23970143003519B6 /* ControlCenterStateManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */; };
 		F7FE9BCB23972DAD004C06DF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1D0A3A1BDC003C02F2 /* main.cpp */; };
 		F7FE9BCC23972DAD004C06DF /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */; };
@@ -368,6 +371,8 @@
 		F4F5B6B8BA2BD52C646ED908 /* OscException.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = OscException.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscException.h; sourceTree = SOURCE_ROOT; };
 		F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = InstanceStateManager.cpp; sourceTree = "<group>"; };
 		F70390F42396C0E6009C6E76 /* InstanceStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstanceStateManager.h; sourceTree = "<group>"; };
+		F787CF28239E1098009B37A7 /* StateTimer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StateTimer.cpp; sourceTree = "<group>"; };
+		F787CF29239E1098009B37A7 /* StateTimer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StateTimer.h; sourceTree = "<group>"; };
 		F79FD5972396D83F003519B6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ControlCenterStateManager.cpp; sourceTree = "<group>"; };
 		F79FD59923970143003519B6 /* ControlCenterStateManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ControlCenterStateManager.h; sourceTree = "<group>"; };
@@ -829,12 +834,14 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				F79FD5972396D83F003519B6 /* Constants.h */,
+				F787CF28239E1098009B37A7 /* StateTimer.cpp */,
+				F787CF29239E1098009B37A7 /* StateTimer.h */,
 				E4B69E1D0A3A1BDC003C02F2 /* main.cpp */,
 				E4B69E1E0A3A1BDC003C02F2 /* ofApp.cpp */,
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				F70390F32396C0E6009C6E76 /* InstanceStateManager.cpp */,
 				F70390F42396C0E6009C6E76 /* InstanceStateManager.h */,
-				F79FD5972396D83F003519B6 /* Constants.h */,
 				44C11793955003765D6C0361 /* NetworkedClient.h */,
 				2FC7070D79AD5857CDE1A2AC /* NetworkedClient.cpp */,
 				F79FD59823970143003519B6 /* ControlCenterStateManager.cpp */,
@@ -1105,6 +1112,7 @@
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				E4B69E210A3A1BDC003C02F2 /* ofApp.cpp in Sources */,
 				E737C089EE8C8AE6A36495EF /* NetworkedClient.cpp in Sources */,
+				F787CF2A239E1098009B37A7 /* StateTimer.cpp in Sources */,
 				4B4985BCC31F5516E3241AE6 /* NetworkedClientRegularClient.cpp in Sources */,
 				9DB50E34AF1249E1E5C9BAEB /* NetworkedClientControlCenter.cpp in Sources */,
 				856AA354D08AB4B323081444 /* ofxBaseGui.cpp in Sources */,
@@ -1141,6 +1149,7 @@
 				F7FE9BCB23972DAD004C06DF /* main.cpp in Sources */,
 				F7FE9BCC23972DAD004C06DF /* ofApp.cpp in Sources */,
 				F7FE9BCD23972DAD004C06DF /* NetworkedClient.cpp in Sources */,
+				F787CF2B239E1098009B37A7 /* StateTimer.cpp in Sources */,
 				F7FE9BCE23972DAD004C06DF /* NetworkedClientRegularClient.cpp in Sources */,
 				F7FE9BCF23972DAD004C06DF /* NetworkedClientControlCenter.cpp in Sources */,
 				F7FE9BD023972DAD004C06DF /* ofxBaseGui.cpp in Sources */,
@@ -1177,6 +1186,7 @@
 				F7FE9BF523972DB8004C06DF /* main.cpp in Sources */,
 				F7FE9BF623972DB8004C06DF /* ofApp.cpp in Sources */,
 				F7FE9BF723972DB8004C06DF /* NetworkedClient.cpp in Sources */,
+				F787CF2C239E1098009B37A7 /* StateTimer.cpp in Sources */,
 				F7FE9BF823972DB8004C06DF /* NetworkedClientRegularClient.cpp in Sources */,
 				F7FE9BF923972DB8004C06DF /* NetworkedClientControlCenter.cpp in Sources */,
 				F7FE9BFA23972DB8004C06DF /* ofxBaseGui.cpp in Sources */,

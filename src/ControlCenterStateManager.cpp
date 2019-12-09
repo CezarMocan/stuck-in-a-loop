@@ -9,6 +9,17 @@
 
 ControlCenterStateManager::ControlCenterStateManager(NetworkedClientControlCenter* networkClient) {
   this->networkClient = networkClient;
+  this->timer = new StateTimer(this);
+}
+
+void ControlCenterStateManager::update(int currTime) {
+  this->currTime = currTime;
+  timer->update(currTime);
+}
+
+void ControlCenterStateManager::timerCallback(int clientId, VideoChannelState s) {
+  ofLogNotice() << "timeCallbackFor " << clientId;
+  moveClientToState(clientId, s);
 }
 
 void ControlCenterStateManager::registerClient(int clientId) {
@@ -46,11 +57,11 @@ void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelStat
 
 void ControlCenterStateManager::autoAdvanceGlobalState(int clientId, VideoChannelState oldState, VideoChannelState newState) {
   if (oldState.installationState == ACTION_1 || oldState.installationState == ACTION_2 || oldState.installationState == ACTION_3 || oldState.installationState == ACTION_4) {
-    int nextClientId = getNextActiveClientId(clientId);
-    
-    VideoChannelState nextClientState;
-    nextClientState.characterState = WALK_IN;
-    moveClientToState(nextClientId, nextClientState);
+//    int nextClientId = getNextActiveClientId(clientId);
+//
+//    VideoChannelState nextClientState;
+//    nextClientState.characterState = WALK_IN;
+//    moveClientToState(nextClientId, nextClientState);
   } else if (oldState.characterState == WALK_OUT) {
   
   }
@@ -63,4 +74,25 @@ int ControlCenterStateManager::getNextActiveClientId(int clientId) {
   } else {
     return nextId;
   }
+}
+
+void ControlCenterStateManager::userCalledClient(int clientId) {
+  if (clientStates.find(clientId) == clientStates.end()) {
+    ofLogWarning() << "moveClientToState failed for " << clientId << "because client is not in the map";
+    return;
+  }
+  
+  if (clientStates[clientId].characterState == ABSENT) {
+    VideoChannelState newState;
+    newState.phoneState = RINGING;
+    newState.lightState = ON;
+    moveClientToState(clientId, newState);
+    
+    VideoChannelState nextState;
+    
+    timer->addTimer(1000, clientId, nextState);
+  } else {
+    
+  }
+
 }
