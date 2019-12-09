@@ -106,7 +106,7 @@ void ofApp::update(){
           bool found = false;
           if (currentPhoneNumber.size() == 3) {
             for (int c = 0; c < NO_CLIENTS; c++) {
-              if (currentPhoneNumber == PHONE_NUMBERS[c]) {
+              if (currentPhoneNumber.compare(PHONE_NUMBERS[c]) == 0) {
                 found = true;
                 globalStateManager->userCalledClient(c);
                 break;
@@ -114,7 +114,7 @@ void ofApp::update(){
             }
             
             if (!found) {
-              
+              globalStateManager->userCalledWrongNumber();
             }
           }
           break;
