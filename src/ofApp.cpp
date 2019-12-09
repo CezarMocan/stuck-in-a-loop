@@ -9,16 +9,7 @@
 void ofApp::setup(){
     ofSetVerticalSync(true);
     setupGUI();
-    
-    serialManager.listDevices();
-    vector <ofSerialDeviceInfo> deviceList = serialManager.getDeviceList();
-    for (int i = 0; i < deviceList.size(); i++) {
-        ofLogNotice() << deviceList[i].getDeviceID() << " " << deviceList[i].getDeviceName() << " " << deviceList[i].getDevicePath();
-    }
-    if (serialManager.setup()) {
-        ofLogNotice() << "Connected!";
-    }
-    
+  
     testCounter = 0;
   
   
@@ -89,14 +80,19 @@ void ofApp::update(){
     }
   
     if (!serialManager.isInitialized()) return;
-    testCounter++;
-    if (testCounter % 200 == 0) {
-      serialManager.writeByte('i');
-      serialManager.flush();
-    } else if (testCounter % 200 == 100) {
-      serialManager.writeByte('o');
-      serialManager.flush();
+  
+    while (serialManager.available()) {
+      char b = serialManager.readByte();
+      ofLogNotice() << "Serial: " << b;
     }
+//    testCounter++;
+//    if (testCounter % 200 == 0) {
+//      serialManager.writeByte('i');
+//      serialManager.flush();
+//    } else if (testCounter % 200 == 100) {
+//      serialManager.writeByte('o');
+//      serialManager.flush();
+//    }
 }
 
 void ofApp::drawWindowsXp() {
@@ -145,6 +141,16 @@ void ofApp::startAsControlCenterPressed() {
     
     client = new NetworkedClientControlCenter(this, stoi(init_controlCenterConfig[IC_OSC_PORT]));
     globalStateManager = new ControlCenterStateManager((NetworkedClientControlCenter*) client);
+  
+    serialManager.listDevices();
+    vector <ofSerialDeviceInfo> deviceList = serialManager.getDeviceList();
+    for (int i = 0; i < deviceList.size(); i++) {
+        ofLogNotice() << deviceList[i].getDeviceID() << " " << deviceList[i].getDeviceName() << " " << deviceList[i].getDevicePath();
+    }
+    if (serialManager.setup()) {
+        ofLogNotice() << "Connected!";
+    }
+
     started = true;
 }
 

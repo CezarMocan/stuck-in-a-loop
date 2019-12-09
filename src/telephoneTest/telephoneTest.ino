@@ -10,9 +10,12 @@ char currentPhoneNumber[12];
 int currentDigitIndex = 0;
 // motor
 const int MOTOR_PIN = 10;
+//const int MOTOR_PIN = 11;
 const int RELAY_PIN = 9;
 bool ringing = false, ringingState = true;
 int ringingTime;
+
+bool phoneDown = true;
 
 const int RINGING_RESOLUTION = 20;
 const int RINGING_ON = 1500;
@@ -20,8 +23,12 @@ const int RINGING_OFF = 2500;
 
 void gotDigit(int num) {
   currentPhoneNumber[currentDigitIndex] = (num + '0');
+  if (!phoneDown) {
+    Serial.write(currentPhoneNumber[currentDigitIndex]); 
+  }
+  
   if (currentDigitIndex == 2) {
-    Serial.println(currentPhoneNumber);
+//    Serial.println(currentPhoneNumber);
   } else {
     currentDigitIndex++;
   }
@@ -39,7 +46,7 @@ void setup() {
   pinMode(resetPin, INPUT);
   digitalWrite(readyPin, HIGH);
   digitalWrite(pulsePin, HIGH);
-  Serial.println("hello");
+//  Serial.println("hello");
 
   pinMode(MOTOR_PIN, OUTPUT);
   pinMode(RELAY_PIN, OUTPUT);
@@ -55,7 +62,7 @@ void loop() {
     // Phone wheel is not moving
     if (prevReadyState == LOW) {
       // We just finished dialing a digit
-      Serial.println(lastPulseCount);
+//      Serial.println(lastPulseCount);
       gotDigit(lastPulseCount % 10);
       lastPulseCount = 0;
     }
@@ -77,7 +84,11 @@ void loop() {
   if (preResetPinState != resetPinState) {
     if (resetPinState == HIGH) {
       resetNumber();
-      Serial.println("reset");
+      phoneDown = true;
+      Serial.write('r');
+    } else {
+      Serial.write('s');
+      phoneDown = false;
     }
     delay(10);
   }
@@ -116,6 +127,8 @@ void loop() {
       ringingTime = 0;
     } else if (bt == 'p') {
       digitalWrite(RELAY_PIN, HIGH);
+    } else if (bt == 'l') {
+      digitalWrite(RELAY_PIN, LOW);
     }
   }
 }
