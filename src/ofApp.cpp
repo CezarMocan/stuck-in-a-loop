@@ -116,6 +116,8 @@ void ofApp::update(){
             if (!found) {
               globalStateManager->userCalledWrongNumber();
             }
+            
+            currentPhoneNumber = "";
           }
           break;
       }

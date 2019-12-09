@@ -3,16 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
-      </ContextState>
-      <ContextState
-         contextName = "ofApp::controlCenterReceivedUpstreamUpdate(int, VideoChannelState):ofApp.cpp">
-      </ContextState>
-      <ContextState
          contextName = "ControlCenterStateManager::userCalledClient(int):ControlCenterStateManager.cpp">
          <PersistentStrings>
             <PersistentString
                value = "clientStates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InstanceStateManager::updateState(VideoChannelState):InstanceStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -28,20 +30,26 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "InstanceStateManager::updateState(VideoChannelState):InstanceStateManager.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "InstanceStateManager::loadVideos():InstanceStateManager.cpp">
          <PersistentStrings>
             <PersistentString
                value = "videoPaths[clientId][i][j][k][l]">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ofApp::update():ofApp.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentPhoneNumber">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ofApp::controlCenterReceivedUpstreamUpdate(int, VideoChannelState):ofApp.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
