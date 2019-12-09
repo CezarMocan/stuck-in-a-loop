@@ -84,6 +84,41 @@ void ofApp::update(){
     while (serialManager.available()) {
       char b = serialManager.readByte();
       ofLogNotice() << "Serial: " << b;
+      switch (b) {
+        case 'r':
+          currentPhoneNumber = "";
+          globalStateManager->userCancelled();
+          break;
+        case 's':
+          currentPhoneNumber = "";
+          break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+          currentPhoneNumber = currentPhoneNumber + b;
+          bool found = false;
+          if (currentPhoneNumber.size() == 3) {
+            for (int c = 0; c < NO_CLIENTS; c++) {
+              if (currentPhoneNumber == PHONE_NUMBERS[c]) {
+                found = true;
+                globalStateManager->userCalledClient(c);
+                break;
+              }
+            }
+            
+            if (!found) {
+              
+            }
+          }
+          break;
+      }
     }
 //    testCounter++;
 //    if (testCounter % 200 == 0) {

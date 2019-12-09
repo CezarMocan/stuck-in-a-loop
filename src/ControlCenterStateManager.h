@@ -21,6 +21,7 @@ class ControlCenterStateManager {
     void moveClientToState(int clientId, VideoChannelState s, bool isDownstream = true);
     void moveClientToState(int clientId, INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c, bool isDownstream = true);
   
+    void userCalledWrongNumber();
     void userCalledClient(int clientId);
     void userCancelled();
   

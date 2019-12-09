@@ -77,6 +77,8 @@ class ofApp : public ofBaseApp{
         ofImage img_xpBar;
         ofImage img_xpAutumn, img_xpBliss, img_xpAzul, img_xpWind;
         ofTrueTypeFont  fnt_tahoma;
+  
+        string currentPhoneNumber = "";
 		
     private:
         NetworkedClient *client;

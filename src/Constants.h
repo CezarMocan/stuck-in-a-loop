@@ -42,4 +42,6 @@ const string IC_HOST_PORT = "HOST_PORT";
 const string IC_OSC_PORT = "OSC_PORT";
 const string IC_CLIENT_ID = "CLIENT_ID";
 
+const string PHONE_NUMBERS[4] = {"203", "392", "421", "777"};
+
 #endif /* Constants_h */

@@ -136,6 +136,18 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
   }
 }
 
+void ControlCenterStateManager::userCalledWrongNumber() {
+  int clientWithCharacter = getCurrentClientWithCharacter();
+  if (clientWithCharacter != -1) {
+    VideoChannelState nextState;
+    nextState.installationState = DENY_WRONG;
+    nextState.phoneState = DOWN;
+    nextState.lightState = OFF;
+    nextState.characterState = PRESENT;
+    moveClientToState(clientWithCharacter, nextState);
+  }
+}
+
 void ControlCenterStateManager::userCancelled() {
   if (currentlyCallingClient == -1) return;
   
