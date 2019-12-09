@@ -290,12 +290,12 @@ void ofApp::keyPressed(int key){
       case 'j': clientId = 2; break;
       case 'm': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.installationState = HAPPY;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.installationState = HAPPY;
+//    newState.phoneState = RINGING;
+//    newState.lightState = ON;
+//    newState.characterState = PRESENT;
+//    globalStateManager->moveClientToState(clientId, newState);
   }
   if (key == '8' || key == 'i' || key == 'k' || key == ',') {
     int clientId;
@@ -305,12 +305,12 @@ void ofApp::keyPressed(int key){
       case 'k': clientId = 2; break;
       case ',': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.installationState = NEUTRAL;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.installationState = NEUTRAL;
+//    newState.phoneState = RINGING;
+//    newState.lightState = ON;
+//    newState.characterState = PRESENT;
+//    globalStateManager->moveClientToState(clientId, newState);
   }
   if (key == '9' || key == 'o' || key == 'l' || key == '.') {
     int clientId;
@@ -320,12 +320,12 @@ void ofApp::keyPressed(int key){
       case 'l': clientId = 2; break;
       case '.': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.installationState = ANGRY;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.installationState = ANGRY;
+//    newState.phoneState = RINGING;
+//    newState.lightState = ON;
+//    newState.characterState = PRESENT;
+//    globalStateManager->moveClientToState(clientId, newState);
   }
   if (key == '0' || key == 'p' || key == ';' || key == '/') {
     int clientId;
@@ -335,12 +335,12 @@ void ofApp::keyPressed(int key){
       case ';': clientId = 2; break;
       case '/': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.installationState = FRUSTRATED;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.installationState = FRUSTRATED;
+//    newState.phoneState = RINGING;
+//    newState.lightState = ON;
+//    newState.characterState = PRESENT;
+//    globalStateManager->moveClientToState(clientId, newState);
   }
   if (key == '-' || key == '[' || key == '\'' || key == ']') {
     int clientId;
@@ -350,12 +350,12 @@ void ofApp::keyPressed(int key){
       case '\'': clientId = 2; break;
       case ']': clientId = 3; break;
     }
-    VideoChannelState newState;
-    newState.installationState = RESIGNED;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
+//    VideoChannelState newState;
+//    newState.installationState = RESIGNED;
+//    newState.phoneState = RINGING;
+//    newState.lightState = ON;
+//    newState.characterState = PRESENT;
+//    globalStateManager->moveClientToState(clientId, newState);
   }
   
   if (key == '!') {
@@ -373,7 +373,7 @@ void ofApp::keyPressed(int key){
     VideoChannelState newState;
     newState.installationState = JANE_CALLING;
     newState.phoneState = UP;
-    newState.lightState = OFF;
+    newState.lightState = ON;
     newState.characterState = PRESENT;
     globalStateManager->moveClientToState(clientId, newState);
   }

@@ -45,7 +45,7 @@ void ControlCenterStateManager::moveClientToState(int clientId, VideoChannelStat
 }
 
 void ControlCenterStateManager::autoAdvanceGlobalState(int clientId, VideoChannelState oldState, VideoChannelState newState) {
-  if (oldState.installationState == HAPPY || oldState.installationState == NEUTRAL || oldState.installationState == ANGRY || oldState.installationState == FRUSTRATED || oldState.installationState == RESIGNED) {
+  if (oldState.installationState == ACTION_1 || oldState.installationState == ACTION_2 || oldState.installationState == ACTION_3 || oldState.installationState == ACTION_4) {
     int nextClientId = getNextActiveClientId(clientId);
     
     VideoChannelState nextClientState;
