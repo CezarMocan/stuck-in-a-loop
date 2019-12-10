@@ -342,6 +342,9 @@ void ofApp::controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState 
 void ofApp::controlCenterReceivedUpstreamSoundNotice(int clientId, VideoChannelState state) {
   ofLogNotice() << "controlCenterReceivedUpstreamSoundNotice";
   if (!phoneAudios[state.installationState][state.phoneState][state.lightState][state.characterState].isLoaded()) return;
+  if (dialTone.isPlaying()) dialTone.stop();
+  if (busyTone.isPlaying()) busyTone.stop();
+  if (ringingTone.isPlaying()) ringingTone.stop();
   phoneAudios[state.installationState][state.phoneState][state.lightState][state.characterState].play();
 }
 
