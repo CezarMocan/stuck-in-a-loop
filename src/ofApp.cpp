@@ -107,6 +107,7 @@ void ofApp::serialReceived(char b) {
         globalStateManager->userCancelled();
         phoneIsUp = false;
         soundStopAll();
+        GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
         serialManager.writeByte('p');
         break;
       case 's':
@@ -123,6 +124,7 @@ void ofApp::serialReceived(char b) {
         GSTATE_isPhoneRinging = false;
         GSTATE_callOutInitTime = -1;
         GSTATE_isCallingOut = false;
+        GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
         serialManager.writeByte('o');
         break;
       case '0':
