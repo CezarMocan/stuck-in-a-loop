@@ -28,6 +28,7 @@ class ControlCenterStateManager {
     void danqiWelcomeMessage();
     void danqiCallingOutHangUp();
     void ifDanqiCallingOutHangUp();
+    bool isIdle();
   
     void timerCallback(int clientId, VideoChannelState s);
   
@@ -47,6 +48,15 @@ class ControlCenterStateManager {
   
     int currentlyCallingClient = -1;
     pair <int, int> TIMER_pendingActionForClient = make_pair(-1, -1);
+  
+    INSTALLATION_STATE getNextDenyAsshole();
+    INSTALLATION_STATE previousDenyAssholes[2];
+  
+    INSTALLATION_STATE getNextDenyWrong();
+    INSTALLATION_STATE previousDenyWrongs[2];
+  
+    INSTALLATION_STATE getNextAction();
+    INSTALLATION_STATE previousActions[2];
   
 };
 

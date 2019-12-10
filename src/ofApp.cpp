@@ -180,45 +180,43 @@ void ofApp::update(){
   
     if (!serialManager.isInitialized()) return;
   
-    while (serialManager.available()) {
-      char b = serialManager.readByte();
-      serialReceived(b);
-    }
-  
-    int currTime = ofGetElapsedTimeMillis();
-  
-    if (!phoneIsUp && GSTATE_isCallingOut && !GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_DELAY_MS) {
-      // Time to make the phone ring cha ching!
-      GSTATE_isPhoneRinging = true;
-      serialManager.writeByte('i');
-    } else if (!phoneIsUp && GSTATE_isCallingOut && GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_TOO_MUCH_MS) {
-      // We've called enough with no response, hang up and go back to regular state.
-      GSTATE_isPhoneRinging = false;
-      GSTATE_callOutInitTime = -1;
-      GSTATE_isCallingOut = false;
-      globalStateManager->danqiCallingOutHangUp();
-      serialManager.writeByte('o');
-    } else {
+    if (client->isControlCenter()) {
+      while (serialManager.available()) {
+        char b = serialManager.readByte();
+        serialReceived(b);
+      }
     
+      int currTime = ofGetElapsedTimeMillis();
+      if (!phoneIsUp && !GSTATE_isCallingOut) {
+        // Installation auto-adjustment: if idle for enough time, Danqi calls out.
+        if (globalStateManager->isIdle()) {
+          if (ofGetElapsedTimeMillis() - GSTATE_lastNonIdleTime > GSTATE_IDLE_TO_ACTIVE_TIME) {
+            danqiCallOut();
+            GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
+          }
+        } else {
+          GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
+        }
+      } else if (!phoneIsUp && GSTATE_isCallingOut && !GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_DELAY_MS) {
+        // Installation auto-adjustment: once Danqi has called out, play the real-life phone ringer once the video gets to the right spot.
+        GSTATE_isPhoneRinging = true;
+        serialManager.writeByte('i');
+      } else if (!phoneIsUp && GSTATE_isCallingOut && GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_TOO_MUCH_MS) {
+        // Installation auto-adjustment: We've called enough with no response, hang up and go back to regular state.
+        GSTATE_isPhoneRinging = false;
+        GSTATE_callOutInitTime = -1;
+        GSTATE_isCallingOut = false;
+        globalStateManager->danqiCallingOutHangUp();
+        serialManager.writeByte('o');
+      } else {
+      
+      }
     }
-//    testCounter++;
-//    if (testCounter % 200 == 0) {
-//      serialManager.writeByte('i');
-//      serialManager.flush();
-//    } else if (testCounter % 200 == 100) {
-//      serialManager.writeByte('o');
-//      serialManager.flush();
-//    }
 }
 
 void ofApp::drawWindowsXp() {
-    // Draw desktop background
-//    img_xpAutumn.draw(0, 0, APP_WIDTH, APP_HEIGHT);
-//    img_xpBliss.draw(0, 0, APP_WIDTH, APP_HEIGHT);
-  
     // Draw Windows XP task bar
     img_xpBar.draw(0, APP_HEIGHT - 24, APP_WIDTH, 24);
-  
   
     // Draw current time
     time_t rawtime;
@@ -360,12 +358,6 @@ void ofApp::danqiCallOut() {
   GSTATE_isCallingOut = true;
   GSTATE_callOutInitTime = ofGetElapsedTimeMillis();
   globalStateManager->danqiCallingOut();
-//  VideoChannelState newState;
-//  newState.installationState = JANE_CALLING;
-//  newState.phoneState = RINGING;
-//  newState.lightState = OFF;
-//  newState.characterState = PRESENT;
-//  globalStateManager->moveClientToState(clientId, newState);
 }
 
 //--------------------------------------------------------------
@@ -413,21 +405,6 @@ void ofApp::keyPressed(int key){
     newState.characterState = WALK_OUT;
     globalStateManager->moveClientToState(clientId, newState);
   }
-  if (key == '4' || key == 'r' || key == 'f' || key == 'v') {
-    int clientId;
-    switch (key) {
-      case '4': clientId = 0; break;
-      case 'r': clientId = 1; break;
-      case 'f': clientId = 2; break;
-      case 'v': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.installationState = DENY_WRONG;
-    newState.phoneState = DOWN;
-    newState.lightState = OFF;
-    newState.characterState = PRESENT;
-    globalStateManager->moveClientToState(clientId, newState);
-  }
 
   if (key == '5' || key == 't' || key == 'g' || key == 'b') {
     int clientId;
@@ -444,64 +421,7 @@ void ofApp::keyPressed(int key){
     globalStateManager->userCancelled();
   }
   if (key == '7' || key == 'u' || key == 'j' || key == 'm') {
-    int clientId;
-    switch (key) {
-      case '7': clientId = 0; break;
-      case 'u': clientId = 1; break;
-      case 'j': clientId = 2; break;
-      case 'm': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.installationState = ACTION_1;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = WALK_IN;
-    globalStateManager->moveClientToState(clientId, newState);
-  }
-  if (key == '8' || key == 'i' || key == 'k' || key == ',') {
-    int clientId;
-    switch (key) {
-      case '8': clientId = 0; break;
-      case 'i': clientId = 1; break;
-      case 'k': clientId = 2; break;
-      case ',': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.installationState = ACTION_2;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = WALK_IN;
-    globalStateManager->moveClientToState(clientId, newState);
-  }
-  if (key == '9' || key == 'o' || key == 'l' || key == '.') {
-    int clientId;
-    switch (key) {
-      case '9': clientId = 0; break;
-      case 'o': clientId = 1; break;
-      case 'l': clientId = 2; break;
-      case '.': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.installationState = ACTION_3;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = WALK_IN;
-    globalStateManager->moveClientToState(clientId, newState);
-  }
-  if (key == '0' || key == 'p' || key == ';' || key == '/') {
-    int clientId;
-    switch (key) {
-      case '0': clientId = 0; break;
-      case 'p': clientId = 1; break;
-      case ';': clientId = 2; break;
-      case '/': clientId = 3; break;
-    }
-    VideoChannelState newState;
-    newState.installationState = ACTION_4;
-    newState.phoneState = RINGING;
-    newState.lightState = ON;
-    newState.characterState = WALK_IN;
-    globalStateManager->moveClientToState(clientId, newState);
+    globalStateManager->userCalledWrongNumber();
   }
   
   if (key == '!') {

@@ -12,22 +12,43 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
     this->app = app;
     this->clientId = clientId;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < NO_CLIENTS; i++) {
       videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "new_video/" + to_string(i) + "/idle_down_off_absent.mp4";
-//      videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "test.mp4";
       
 //      videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/idle_down_off_present.mp4";
       videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "test.mp4";
       
-      videoPaths[i][DENY_WRONG][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_wrong_1.mp4";
-      stateVolatile[DENY_WRONG][DOWN][OFF][PRESENT] = true;
-      nextStateIfVolatile[DENY_WRONG][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_WRONG][DOWN][OFF][PRESENT].phoneState = DOWN;
-      nextStateIfVolatile[DENY_WRONG][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_WRONG][DOWN][OFF][PRESENT].characterState = PRESENT;
+      videoPaths[i][DENY_WRONG_1][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_wrong_1.mp4";
+      stateVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT].characterState = PRESENT;
       
-      videoPaths[i][DENY_ASSHOLE][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_1.mp4";
-      stateVolatile[DENY_ASSHOLE][DOWN][OFF][PRESENT] = true;
-      nextStateIfVolatile[DENY_ASSHOLE][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE][DOWN][OFF][PRESENT].phoneState = DOWN;
-      nextStateIfVolatile[DENY_ASSHOLE][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE][DOWN][OFF][PRESENT].characterState = PRESENT;
+      videoPaths[i][DENY_WRONG_2][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_wrong_2.mp4";
+      stateVolatile[DENY_WRONG_2][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_WRONG_2][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_WRONG_2][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_WRONG_2][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_WRONG_2][DOWN][OFF][PRESENT].characterState = PRESENT;
+
+      videoPaths[i][DENY_WRONG_3][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_wrong_3.mp4";
+      stateVolatile[DENY_WRONG_3][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_WRONG_3][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_WRONG_3][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_WRONG_3][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_WRONG_3][DOWN][OFF][PRESENT].characterState = PRESENT;
+
+      
+      videoPaths[i][DENY_ASSHOLE_1][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_1.mp4";
+      stateVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].characterState = PRESENT;
+      
+      videoPaths[i][DENY_ASSHOLE_2][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_2.mp4";
+      stateVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].characterState = PRESENT;
+
+      videoPaths[i][DENY_ASSHOLE_3][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_3.mp4";
+      stateVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT] = true;
+      nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].phoneState = DOWN;
+      nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].characterState = PRESENT;
+
       
       videoPaths[i][IDLE][DOWN][OFF][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_off_walk_in.mp4";
       stateVolatile[IDLE][DOWN][OFF][WALK_IN] = true;

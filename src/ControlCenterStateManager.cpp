@@ -5,11 +5,21 @@
 //  Created by Cezar Mocan on 12/3/19.
 //
 
+#include <cstdlib>
 #include "ControlCenterStateManager.h"
 
 ControlCenterStateManager::ControlCenterStateManager(NetworkedClientControlCenter* networkClient) {
   this->networkClient = networkClient;
   this->timer = new StateTimer(this);
+  
+  previousActions[0] = ACTION_1;
+  previousActions[1] = ACTION_2;
+  
+  previousDenyAssholes[0] = DENY_ASSHOLE_3;
+  previousDenyAssholes[1] = DENY_ASSHOLE_2;
+  
+  previousDenyWrongs[0] = DENY_WRONG_3;
+  previousDenyWrongs[1] = DENY_WRONG_2;
 }
 
 void ControlCenterStateManager::update(int currTime) {
@@ -117,7 +127,7 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
       timer->addTimer(500, clientWithCharacter, nextState);
       
       VideoChannelState nextCurrState;
-      nextCurrState.installationState = ACTION_3;
+      nextCurrState.installationState = getNextAction();
       nextCurrState.phoneState = RINGING;
       nextCurrState.lightState = ON;
       nextCurrState.characterState = WALK_IN;
@@ -128,7 +138,7 @@ void ControlCenterStateManager::userCalledClient(int clientId) {
     }
   } else {
     VideoChannelState newState;
-    newState.installationState = DENY_ASSHOLE;
+    newState.installationState = getNextDenyAsshole();
     newState.phoneState = DOWN;
     newState.lightState = OFF;
     newState.characterState = PRESENT;
@@ -140,7 +150,7 @@ void ControlCenterStateManager::userCalledWrongNumber() {
   int clientWithCharacter = getCurrentClientWithCharacter();
   if (clientWithCharacter != -1) {
     VideoChannelState nextState;
-    nextState.installationState = DENY_WRONG;
+    nextState.installationState = getNextDenyWrong();
     nextState.phoneState = DOWN;
     nextState.lightState = OFF;
     nextState.characterState = PRESENT;
@@ -218,4 +228,68 @@ void ControlCenterStateManager::ifDanqiCallingOutHangUp() {
   if (clientStates[clientId].installationState == JANE_CALLING && clientStates[clientId].characterState != WALK_OUT) {
     danqiCallingOutHangUp();
   }  
+}
+
+INSTALLATION_STATE ControlCenterStateManager::getNextAction() {
+  const int noStates = 4;
+  
+  INSTALLATION_STATE newAction = static_cast<INSTALLATION_STATE>(ACTION_1 + (rand() % noStates));
+  while (newAction == previousActions[0] || newAction == previousActions[1]) {
+    newAction = static_cast<INSTALLATION_STATE>(ACTION_1 + (rand() % noStates));
+  }
+  previousActions[0] = previousActions[1];
+  previousActions[1] = newAction;
+  
+  return newAction;
+}
+
+INSTALLATION_STATE ControlCenterStateManager::getNextDenyAsshole() {
+  const int noStates = 3;
+
+  INSTALLATION_STATE newAction = static_cast<INSTALLATION_STATE>(DENY_ASSHOLE_1 + (rand() % noStates));
+  while (newAction == previousDenyAssholes[0] || newAction == previousDenyAssholes[1]) {
+    newAction = static_cast<INSTALLATION_STATE>(DENY_ASSHOLE_1 + (rand() % noStates));
+  }
+  previousDenyAssholes[0] = previousDenyAssholes[1];
+  previousDenyAssholes[1] = newAction;
+  
+  return newAction;
+}
+
+INSTALLATION_STATE ControlCenterStateManager::getNextDenyWrong() {
+  const int noStates = 3;
+  INSTALLATION_STATE initialState = DENY_WRONG_1;
+
+  INSTALLATION_STATE newAction = static_cast<INSTALLATION_STATE>(initialState + (rand() % noStates));
+  while (newAction == previousDenyWrongs[0] || newAction == previousDenyWrongs[1]) {
+    newAction = static_cast<INSTALLATION_STATE>(initialState + (rand() % noStates));
+  }
+  previousDenyWrongs[0] = previousDenyWrongs[1];
+  previousDenyWrongs[1] = newAction;
+  
+  return newAction;
+}
+
+bool ControlCenterStateManager::isIdle() {
+  int clientId = getCurrentClientWithCharacter();
+  if (clientId == -1) return;
+  
+  for (int i = 0; i < NO_CLIENTS; i++) {
+    VideoChannelState c = clientStates[i];
+    if (i == clientId) {
+      if (c.installationState == IDLE && c.lightState == OFF && c.phoneState == DOWN && c.characterState == PRESENT) {
+        continue;
+      } else {
+        return false;
+      }
+    } else {
+      
+      if (c.installationState == IDLE && c.lightState == OFF && c.phoneState == DOWN && c.characterState == ABSENT) {
+        continue;
+      } else {
+        return false;
+      }
+    }
+  }  
+  return true;
 }
