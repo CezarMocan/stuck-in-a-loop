@@ -171,3 +171,40 @@ void ControlCenterStateManager::userCancelled() {
   
   currentlyCallingClient == -1;
 }
+
+void ControlCenterStateManager::danqiCallingOut() {
+  int clientId = getCurrentClientWithCharacter();
+  
+  if (clientId == -1) return;
+  
+  VideoChannelState newState;
+  newState.installationState = JANE_CALLING;
+  newState.phoneState = RINGING;
+  newState.lightState = OFF;
+  newState.characterState = PRESENT;
+  moveClientToState(clientId, newState);
+}
+
+void ControlCenterStateManager::danqiWelcomeMessage() {
+  int clientId = getCurrentClientWithCharacter();
+  if (clientId == -1) return;
+  
+  VideoChannelState newState;
+  newState.installationState = JANE_CALLING;
+  newState.phoneState = UP;
+  newState.lightState = ON;
+  newState.characterState = PRESENT;
+  moveClientToState(clientId, newState);
+}
+
+void ControlCenterStateManager::danqiCallingOutHangUp() {
+  int clientId = getCurrentClientWithCharacter();
+  if (clientId == -1) return;
+
+  VideoChannelState newState;
+  newState.installationState = JANE_CALLING;
+  newState.phoneState = DOWN;
+  newState.lightState = OFF;
+  newState.characterState = WALK_OUT;
+  moveClientToState(clientId, newState);
+}

@@ -44,6 +44,9 @@
          contextName = "ofApp::update():ofApp.cpp">
          <PersistentStrings>
             <PersistentString
+               value = "phoneIsUp">
+            </PersistentString>
+            <PersistentString
                value = "currentPhoneNumber">
             </PersistentString>
          </PersistentStrings>

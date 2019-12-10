@@ -110,6 +110,7 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[JANE_CALLING][UP][ON][PRESENT] = true;
       nextStateIfVolatile[JANE_CALLING][UP][ON][PRESENT].installationState = JANE_CALLING; nextStateIfVolatile[JANE_CALLING][UP][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[JANE_CALLING][UP][ON][PRESENT].lightState = OFF; nextStateIfVolatile[JANE_CALLING][UP][ON][PRESENT].characterState = WALK_OUT;
+      audioPlaysInReceptor[JANE_CALLING][UP][ON][PRESENT] = true;
       
       videoPaths[i][JANE_CALLING][DOWN][OFF][WALK_OUT] = "new_video/" + to_string(i) + "/danqi_calling_3_hang_up.mp4";
       stateVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT] = true;

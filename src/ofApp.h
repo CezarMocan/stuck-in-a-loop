@@ -85,4 +85,22 @@ class ofApp : public ofBaseApp{
         InstanceStateManager *localInstanceManager;
         ControlCenterStateManager *globalStateManager;
         ofSerial serialManager;
+        ofSoundStream soundStreamOut;
+  
+        ofSoundPlayer   dialTone, ringingTone, busyTone;
+  
+        void soundPlayDialTone();
+        void soundPlayRingingTone();
+        void soundPlayBusyTone();
+        void soundStopAll();
+  
+        bool phoneIsUp;
+  
+        bool GSTATE_isCallingOut = false;
+        bool GSTATE_isPhoneRinging = false;
+        int GSTATE_callOutInitTime = -1;
+        const int GSTATE_CALL_OUT_RING_DELAY_MS = 8000;
+        const int GSTATE_CALL_OUT_RING_TOO_MUCH_MS = 9000;
+  
+        void danqiCallOut();
 };

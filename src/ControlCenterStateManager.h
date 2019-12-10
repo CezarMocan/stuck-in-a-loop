@@ -24,6 +24,9 @@ class ControlCenterStateManager {
     void userCalledWrongNumber();
     void userCalledClient(int clientId);
     void userCancelled();
+    void danqiCallingOut();
+    void danqiWelcomeMessage();
+    void danqiCallingOutHangUp();
   
     void timerCallback(int clientId, VideoChannelState s);
   
