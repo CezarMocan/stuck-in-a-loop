@@ -69,5 +69,18 @@ void NetworkedClientRegularClient::sendStateUpdateUpstream(VideoChannelState sta
     m.addIntArg(state.characterState);
   
     oscSender.sendMessage(m);
-    ofLogNotice() << "Sending upsteam state update to host... " << this->clientId;
+    ofLogNotice() << "Sending upstream state update to host... " << this->clientId;
+}
+
+void NetworkedClientRegularClient::sendSoundNoticeUpstream(VideoChannelState state) {
+    ofxOscMessage m;
+    m.setAddress("/upstreamSoundNotice");
+    m.addIntArg(this->clientId);
+    m.addIntArg(state.installationState);
+    m.addIntArg(state.phoneState);
+    m.addIntArg(state.lightState);
+    m.addIntArg(state.characterState);
+  
+    oscSender.sendMessage(m);
+    ofLogNotice() << "Sending upstream sound notice to host... " << this->clientId;
 }

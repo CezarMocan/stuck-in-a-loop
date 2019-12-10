@@ -89,6 +89,72 @@ void ofApp::soundStopAll() {
   if (dialTone.isPlaying()) dialTone.stop();
   if (busyTone.isPlaying()) busyTone.stop();
   if (ringingTone.isPlaying()) ringingTone.stop();
+  if (phoneAudios[ACTION_1][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_1][RINGING][ON][PRESENT].stop();
+  if (phoneAudios[ACTION_2][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_2][RINGING][ON][PRESENT].stop();
+  if (phoneAudios[ACTION_3][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_3][RINGING][ON][PRESENT].stop();
+  if (phoneAudios[ACTION_4][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_4][RINGING][ON][PRESENT].stop();
+  if (phoneAudios[JANE_CALLING][UP][ON][PRESENT].isPlaying()) phoneAudios[JANE_CALLING][UP][ON][PRESENT].stop();
+}
+
+void ofApp::serialReceived(char b) {
+    ofLogNotice() << "Serial: " << b;
+    switch (b) {
+      case 'r':
+        currentPhoneNumber = "";
+        globalStateManager->userCancelled();
+        phoneIsUp = false;
+        soundStopAll();
+        serialManager.writeByte('p');
+        break;
+      case 's':
+        currentPhoneNumber = "";
+        
+        phoneIsUp = true;
+        
+        if (GSTATE_isPhoneRinging) {
+          globalStateManager->danqiWelcomeMessage();
+        } else {
+          soundPlayDialTone();
+        }
+        
+        GSTATE_isPhoneRinging = false;
+        GSTATE_callOutInitTime = -1;
+        GSTATE_isCallingOut = false;
+        serialManager.writeByte('o');
+        break;
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+        soundStopAll();
+        currentPhoneNumber = currentPhoneNumber + b;
+        bool found = false;
+        if (currentPhoneNumber.size() == 3) {
+          for (int c = 0; c < NO_CLIENTS; c++) {
+            if (currentPhoneNumber.compare(PHONE_NUMBERS[c]) == 0) {
+              found = true;
+              globalStateManager->userCalledClient(c);
+              break;
+            }
+          }
+          
+          if (!found) {
+            globalStateManager->userCalledWrongNumber();
+            soundPlayBusyTone();
+          } else {
+            soundPlayRingingTone();
+          }
+          
+          currentPhoneNumber = "";
+        }
+        break;
+    }
 }
 
 //--------------------------------------------------------------
@@ -113,64 +179,7 @@ void ofApp::update(){
   
     while (serialManager.available()) {
       char b = serialManager.readByte();
-      ofLogNotice() << "Serial: " << b;
-      switch (b) {
-        case 'r':
-          currentPhoneNumber = "";
-          globalStateManager->userCancelled();
-          phoneIsUp = false;
-          soundStopAll();
-          serialManager.writeByte('p');
-          break;
-        case 's':
-          currentPhoneNumber = "";
-          
-          phoneIsUp = true;
-          
-          if (GSTATE_isPhoneRinging) {
-            globalStateManager->danqiWelcomeMessage();
-          } else {
-            soundPlayDialTone();
-          }
-          
-          GSTATE_isPhoneRinging = false;
-          GSTATE_callOutInitTime = -1;
-          GSTATE_isCallingOut = false;
-          serialManager.writeByte('o');
-          break;
-        case '0':
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-          soundStopAll();
-          currentPhoneNumber = currentPhoneNumber + b;
-          bool found = false;
-          if (currentPhoneNumber.size() == 3) {
-            for (int c = 0; c < NO_CLIENTS; c++) {
-              if (currentPhoneNumber.compare(PHONE_NUMBERS[c]) == 0) {
-                found = true;
-                globalStateManager->userCalledClient(c);
-                break;
-              }
-            }
-            
-            if (!found) {
-              globalStateManager->userCalledWrongNumber();
-              soundPlayBusyTone();
-            } else {
-              soundPlayRingingTone();
-            }
-            
-            currentPhoneNumber = "";
-          }
-          break;
-      }
+      serialReceived(b);
     }
   
     int currTime = ofGetElapsedTimeMillis();
@@ -254,6 +263,12 @@ void ofApp::startAsControlCenterPressed() {
     if (serialManager.setup()) {
         ofLogNotice() << "Connected!";
     }
+  
+    phoneAudios[ACTION_1][RINGING][ON][PRESENT].load("audio/action_1.mp3");
+    phoneAudios[ACTION_2][RINGING][ON][PRESENT].load("audio/action_2.mp3");
+    phoneAudios[ACTION_3][RINGING][ON][PRESENT].load("audio/action_3.mp3");
+    phoneAudios[ACTION_4][RINGING][ON][PRESENT].load("audio/action_4.mp3");
+    phoneAudios[JANE_CALLING][UP][ON][PRESENT].load("audio/calling_out_monologue.mp3");
 
     started = true;
 }
@@ -311,6 +326,10 @@ void ofApp::sendStateUpdateUpstream(VideoChannelState state) {
   ((NetworkedClientRegularClient*)client)->sendStateUpdateUpstream(state);
 }
 
+void ofApp::sendSoundNoticeUpstream(VideoChannelState state) {
+  ((NetworkedClientRegularClient*)client)->sendSoundNoticeUpstream(state);
+}
+
 void ofApp::controlCenterReceivedRegistration(int clientId) {
   globalStateManager->registerClient(clientId);
 }
@@ -318,6 +337,12 @@ void ofApp::controlCenterReceivedRegistration(int clientId) {
 void ofApp::controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state) {
   ofLogNotice() << "controlCenterReceivedUpstreamUpdate";
   globalStateManager->moveClientToState(clientId, state, false);
+}
+
+void ofApp::controlCenterReceivedUpstreamSoundNotice(int clientId, VideoChannelState state) {
+  ofLogNotice() << "controlCenterReceivedUpstreamSoundNotice";
+  if (!phoneAudios[state.installationState][state.phoneState][state.lightState][state.characterState].isLoaded()) return;
+  phoneAudios[state.installationState][state.phoneState][state.lightState][state.characterState].play();
 }
 
 void ofApp::danqiCallOut() {
@@ -473,11 +498,11 @@ void ofApp::keyPressed(int key){
   }
   
   if (key == 'Q') {
-    globalStateManager->danqiWelcomeMessage();
+    serialReceived('s');
   }
 
   if (key == 'A') {
-    globalStateManager->danqiCallingOutHangUp();
+    serialReceived('r');
   }
 
 

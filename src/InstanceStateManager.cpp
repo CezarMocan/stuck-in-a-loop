@@ -59,7 +59,8 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[ACTION_1][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[ACTION_1][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[ACTION_1][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[ACTION_1][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[ACTION_1][RINGING][ON][PRESENT].characterState = PRESENT;
-
+      audioPlaysInReceptor[ACTION_1][RINGING][ON][PRESENT] = true;
+      
 
       videoPaths[i][ACTION_2][RINGING][ON][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_on_walk_in.mp4";
       stateVolatile[ACTION_2][RINGING][ON][WALK_IN] = true;
@@ -70,6 +71,7 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[ACTION_2][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[ACTION_2][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[ACTION_2][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[ACTION_2][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[ACTION_2][RINGING][ON][PRESENT].characterState = PRESENT;
+      audioPlaysInReceptor[ACTION_2][RINGING][ON][PRESENT] = true;
 
 
       videoPaths[i][ACTION_3][RINGING][ON][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_on_walk_in.mp4";
@@ -81,6 +83,7 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[ACTION_3][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[ACTION_3][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[ACTION_3][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[ACTION_3][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[ACTION_3][RINGING][ON][PRESENT].characterState = PRESENT;
+      audioPlaysInReceptor[ACTION_3][RINGING][ON][PRESENT] = true;
 
 
       videoPaths[i][ACTION_4][RINGING][ON][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_on_walk_in.mp4";
@@ -92,6 +95,7 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[ACTION_4][RINGING][ON][PRESENT] = true;
       nextStateIfVolatile[ACTION_4][RINGING][ON][PRESENT].installationState = IDLE; nextStateIfVolatile[ACTION_4][RINGING][ON][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[ACTION_4][RINGING][ON][PRESENT].lightState = OFF; nextStateIfVolatile[ACTION_4][RINGING][ON][PRESENT].characterState = PRESENT;
+      audioPlaysInReceptor[ACTION_4][RINGING][ON][PRESENT] = true;
 
 
       videoPaths[i][JANE_CALLING][DOWN][OFF][WALK_IN] = videoPaths[i][IDLE][DOWN][OFF][WALK_IN];
@@ -167,6 +171,10 @@ void InstanceStateManager::updateState(VideoChannelState vcs) {
     } else {
       currentlyPlayingVideo.setLoopState(OF_LOOP_NONE);
       currentVideoIsVolatile = true;
+    }
+  
+    if (audioPlaysInReceptor[vcs.installationState][vcs.phoneState][vcs.lightState][vcs.characterState]) {
+      this->app->sendSoundNoticeUpstream(vcs);
     }
   
     oldVideo.stop();

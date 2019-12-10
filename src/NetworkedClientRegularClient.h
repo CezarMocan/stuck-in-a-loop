@@ -24,6 +24,7 @@ class NetworkedClientRegularClient : public NetworkedClient {
         void update();
         void sendMessageToHost(string address);
         void sendStateUpdateUpstream(VideoChannelState state);
+        void sendSoundNoticeUpstream(VideoChannelState state);
 };
 
 #endif /* NetworkedClientRegularClient_h */

@@ -68,10 +68,12 @@ class ofApp : public ofBaseApp{
         // Regular clients
         void receivedStateUpdate(VideoChannelState state);
         void sendStateUpdateUpstream(VideoChannelState state);
+        void sendSoundNoticeUpstream(VideoChannelState state);
   
         // Control center
         void controlCenterReceivedRegistration(int clientId);
         void controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state);
+        void controlCenterReceivedUpstreamSoundNotice(int clientId, VideoChannelState state);
   
         // Windows XP
         ofImage img_xpBar;
@@ -100,7 +102,11 @@ class ofApp : public ofBaseApp{
         bool GSTATE_isPhoneRinging = false;
         int GSTATE_callOutInitTime = -1;
         const int GSTATE_CALL_OUT_RING_DELAY_MS = 8000;
-        const int GSTATE_CALL_OUT_RING_TOO_MUCH_MS = 9000;
+        const int GSTATE_CALL_OUT_RING_TOO_MUCH_MS = 18000;
+  
+        void serialReceived(char b);
   
         void danqiCallOut();
+  
+        ofSoundPlayer phoneAudios[NO_INSTALLATION_STATES][NO_PHONE_STATES][NO_LIGHT_STATES][NO_CHARACTER_STATES];
 };

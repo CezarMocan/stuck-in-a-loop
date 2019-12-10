@@ -44,6 +44,17 @@ void NetworkedClientControlCenter::update() {
             app->controlCenterReceivedUpstreamUpdate(clientId, newState);
 
             ofLogNotice() << "[CLIENT UPSTREAM UPDATE] " << clientId;
+        } else if (m.getAddress().compare("/upstreamSoundNotice") == 0) {
+            int clientId = m.getArgAsInt(0);
+            VideoChannelState newState;
+            newState.installationState = static_cast<INSTALLATION_STATE>(m.getArgAsInt(1));
+            newState.phoneState = static_cast<PHONE_STATE>(m.getArgAsInt(2));
+            newState.lightState = static_cast<LIGHT_STATE>(m.getArgAsInt(3));
+            newState.characterState = static_cast<CHARACTER_STATE>(m.getArgAsInt(4));
+
+            app->controlCenterReceivedUpstreamSoundNotice(clientId, newState);
+
+            ofLogNotice() << "[CLIENT UPSTREAM UPDATE] " << clientId;
         } else {
             
         }
