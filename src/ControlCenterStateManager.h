@@ -27,6 +27,7 @@ class ControlCenterStateManager {
     void danqiCallingOut();
     void danqiWelcomeMessage();
     void danqiCallingOutHangUp();
+    void ifDanqiCallingOutHangUp();
   
     void timerCallback(int clientId, VideoChannelState s);
   

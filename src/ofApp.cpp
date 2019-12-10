@@ -114,7 +114,7 @@ void ofApp::serialReceived(char b) {
         
         phoneIsUp = true;
         
-        if (GSTATE_isPhoneRinging) {
+        if (GSTATE_isCallingOut) {
           globalStateManager->danqiWelcomeMessage();
         } else {
           soundPlayDialTone();

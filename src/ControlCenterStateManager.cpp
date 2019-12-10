@@ -149,6 +149,8 @@ void ControlCenterStateManager::userCalledWrongNumber() {
 }
 
 void ControlCenterStateManager::userCancelled() {
+  ifDanqiCallingOutHangUp();
+  
   if (currentlyCallingClient == -1) return;
   
   if (TIMER_pendingActionForClient.first != -1) {
@@ -207,4 +209,13 @@ void ControlCenterStateManager::danqiCallingOutHangUp() {
   newState.lightState = OFF;
   newState.characterState = WALK_OUT;
   moveClientToState(clientId, newState);
+}
+
+void ControlCenterStateManager::ifDanqiCallingOutHangUp() {
+  int clientId = getCurrentClientWithCharacter();
+  if (clientId == -1) return;
+  
+  if (clientStates[clientId].installationState == JANE_CALLING && clientStates[clientId].characterState != WALK_OUT) {
+    danqiCallingOutHangUp();
+  }  
 }
