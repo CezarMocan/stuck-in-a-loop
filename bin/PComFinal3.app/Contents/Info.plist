@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>PComFinal3</string>
 	<key>CFBundleIconFile</key>
-	<string>icon-debug.icns</string>
+	<string>icon.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>cc.openFrameworks.ofapp3</string>
 	<key>CFBundleInfoDictionaryVersion</key>
