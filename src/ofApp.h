@@ -51,6 +51,8 @@ class ofApp : public ofBaseApp{
     
         ofxPanel guiRegularClient;
         ofxButton startRegularClientButton;
+        ofxTextField networkInterfaceTextField;
+  
         ofxTextField oscPortRegularClientTextField;
         ofxTextField ipForControlCenterRegularClientTextField;
         ofxTextField oscPortForControlCenterRegularClientTextField;
@@ -59,6 +61,8 @@ class ofApp : public ofBaseApp{
         void changedRegularClientHostIp(string &text);
         void changedRegularClientHostPort(string &text);
         void changedRegularClientClientId(string &text);
+        void changedNetworkInterface(string &text);
+        
         map<string, string> init_regularClientConfig;
     
         void startAsRegularClientPressed();
@@ -81,6 +85,8 @@ class ofApp : public ofBaseApp{
         ofTrueTypeFont  fnt_tahoma;
   
         string currentPhoneNumber = "";
+  
+        string networkInterface = "en0";
 		
     private:
         NetworkedClient *client;

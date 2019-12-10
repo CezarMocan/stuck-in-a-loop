@@ -20,7 +20,7 @@ NetworkedClient::NetworkedClient(ofApp *app, int oscPort) {
     
     ofLogNotice() << "OSC Listening on port: " << oscPort;
     this->oscReceiver.setup(oscPort);
-    this->localIpAddress = this->getIp();
+    this->localIpAddress = this->getIp(this->app->networkInterface);
 }
 
 void NetworkedClient::update() { }
@@ -35,8 +35,11 @@ bool NetworkedClient::isRegularClient() {
    return this->cState == REGULAR_CLIENT;
 }
 
-string NetworkedClient::getIp() {
-    const char cmd[] = "ipconfig getifaddr en0";
+string NetworkedClient::getIp(string networkInterface) {
+    char cmd[50];
+    strcpy(cmd, "ipconfig getifaddr ");
+    strncat(cmd, networkInterface.c_str(), networkInterface.size());
+//    const char cmd[] = "ipconfig getifaddr " + networkInterface.c_str();
     std::array<char, 128> buffer;
     std::string result;
     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);

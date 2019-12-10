@@ -30,7 +30,7 @@ class NetworkedClient {
         bool isControlCenter();
         bool isRegularClient();
     
-        static string getIp();
+        static string getIp(string networkInterface);
 };
 
 #endif /* NetworkedClient_h */

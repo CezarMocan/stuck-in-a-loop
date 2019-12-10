@@ -35,8 +35,8 @@ void ofApp::setupGUI() {
     guiControlCenter.setup("Control Center Start Panel");
     guiControlCenter.setSize(400, 400);
     guiControlCenter.setWidthElements(400);
-    
-    guiControlCenter.add(localIpTextField1.setup("Local IP: " + NetworkedClient::getIp()));
+  
+    guiControlCenter.add(localIpTextField1.setup("Local IP: " + NetworkedClient::getIp(this->networkInterface)));
     
     oscPortControlCenterTextField.addListener(this, &ofApp::changedControlCenterOsc);
     guiControlCenter.add(oscPortControlCenterTextField.setup("OSC Port: ", "12345s"));
@@ -49,8 +49,11 @@ void ofApp::setupGUI() {
     guiRegularClient.setup("Regular Client Start Panel");
     guiRegularClient.setPosition(420, 10);
     guiRegularClient.setSize(400, 400);
-    
-    guiRegularClient.add(localIpTextField2.setup("Local IP: " + NetworkedClient::getIp()));
+  
+    guiRegularClient.add(networkInterfaceTextField.setup("Network Interface: ", this->networkInterface));
+    networkInterfaceTextField.addListener(this, &ofApp::changedNetworkInterface);
+
+    guiRegularClient.add(localIpTextField2.setup("Local IP: " + NetworkedClient::getIp(this->networkInterface)));
     
     oscPortRegularClientTextField.addListener(this, &ofApp::changedRegularClientOsc);
     guiRegularClient.add(oscPortRegularClientTextField.setup("OSC Port: ", "20000"));
@@ -312,6 +315,11 @@ void ofApp::changedRegularClientHostPort(string &str) {
 
 void ofApp::changedRegularClientClientId(string &str) {
     init_regularClientConfig[IC_CLIENT_ID] = str;
+}
+
+void ofApp::changedNetworkInterface(string &str) {
+    this->networkInterface = str;
+    localIpTextField2.setup("Local IP: " + NetworkedClient::getIp(this->networkInterface));
 }
 
 //--------------------------------------------------------------
