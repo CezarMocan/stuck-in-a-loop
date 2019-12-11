@@ -149,7 +149,9 @@ void ofApp::serialReceived(char b) {
             }
           }
           
-          if (!found) {
+          if (currentPhoneNumber.compare("989") == 0) {
+            resetAll();
+          } else if (!found) {
             globalStateManager->userCalledWrongNumber();
             soundPlayBusyTone();
           } else {
@@ -160,6 +162,20 @@ void ofApp::serialReceived(char b) {
         }
         break;
     }
+}
+
+void ofApp::resetAll() {
+  VideoChannelState sIdleAbsent, sIdlePresent;
+  sIdlePresent.characterState = WALK_IN;
+  globalStateManager->moveClientToState(0, sIdlePresent);
+  globalStateManager->moveClientToState(1, sIdleAbsent);
+  globalStateManager->moveClientToState(2, sIdleAbsent);
+  globalStateManager->moveClientToState(3, sIdleAbsent);
+  
+  GSTATE_isCallingOut = false;
+  GSTATE_isPhoneRinging = false;
+  GSTATE_callOutInitTime = -1;
+  GSTATE_lastNonIdleTime = 1000000000;
 }
 
 //--------------------------------------------------------------

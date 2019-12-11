@@ -87,6 +87,8 @@ class ofApp : public ofBaseApp{
         string currentPhoneNumber = "";
   
         string networkInterface = "en0";
+  
+        void resetAll();
 		
     private:
         NetworkedClient *client;
