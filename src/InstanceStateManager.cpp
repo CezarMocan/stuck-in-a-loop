@@ -15,8 +15,8 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
     for (int i = 0; i < NO_CLIENTS; i++) {
       videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "new_video/" + to_string(i) + "/idle_down_off_absent.mp4";
       
-//      videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/idle_down_off_present.mp4";
-      videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "test.mp4";
+      videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/idle_down_off_present.mp4";
+//      videoPaths[i][IDLE][DOWN][OFF][PRESENT] = "test.mp4";
       
       videoPaths[i][DENY_WRONG_1][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_wrong_1.mp4";
       stateVolatile[DENY_WRONG_1][DOWN][OFF][PRESENT] = true;
