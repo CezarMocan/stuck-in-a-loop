@@ -11,11 +11,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597715656.562723"
+            timestampString = "597722406.1814409"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c)"
             landmarkType = "7">
          </BreakpointContent>
@@ -27,11 +27,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/InstanceStateManager.cpp"
-            timestampString = "597715656.562812"
+            timestampString = "597722406.181805"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "InstanceStateManager::updateState(VideoChannelState vcs)"
             landmarkType = "7">
          </BreakpointContent>
@@ -43,12 +43,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "src/ofApp.cpp"
-            timestampString = "597715656.562891"
+            timestampString = "597722406.1820689"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "191"
             endingLineNumber = "191"
             landmarkName = "ofApp::update()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "src/ofApp.cpp"
+            timestampString = "597722406.182129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "ofApp::controlCenterReceivedUpstreamUpdate(int clientId, VideoChannelState state)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

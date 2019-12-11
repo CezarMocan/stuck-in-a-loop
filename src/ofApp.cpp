@@ -267,11 +267,14 @@ void ofApp::startAsControlCenterPressed() {
         ofLogNotice() << "Connected!";
     }
   
-    phoneAudios[ACTION_1][RINGING][ON][PRESENT].load("audio/action_1.mp3");
-    phoneAudios[ACTION_2][RINGING][ON][PRESENT].load("audio/action_2.mp3");
-    phoneAudios[ACTION_3][RINGING][ON][PRESENT].load("audio/action_3.mp3");
-    phoneAudios[ACTION_4][RINGING][ON][PRESENT].load("audio/action_4.mp3");
-    phoneAudios[JANE_CALLING][UP][ON][PRESENT].load("audio/calling_out_monologue.mp3");
+    phoneAudios[ACTION_1][RINGING][ON][PRESENT].load("audio/action_1_exp.mp3");
+    phoneAudios[ACTION_2][RINGING][ON][PRESENT].load("audio/action_2_exp.mp3");
+    phoneAudios[ACTION_3][RINGING][ON][PRESENT].load("audio/action_3_exp.mp3");
+    phoneAudios[ACTION_4][RINGING][ON][PRESENT].load("audio/action_4_exp.mp3");
+    phoneAudios[JANE_CALLING][UP][ON][PRESENT].load("audio/calling_out_monologue_exp.mp3");
+    phoneAudios[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].load("audio/deny_asshole_1.mp3");
+    phoneAudios[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].load("audio/deny_asshole_2.mp3");
+    phoneAudios[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].load("audio/deny_asshole_3.mp3");
 
     started = true;
 }

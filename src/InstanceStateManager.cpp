@@ -38,17 +38,19 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT] = true;
       nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].characterState = PRESENT;
+      audioPlaysInReceptor[DENY_ASSHOLE_1][DOWN][OFF][PRESENT] = true;
       
       videoPaths[i][DENY_ASSHOLE_2][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_2.mp4";
       stateVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT] = true;
       nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].characterState = PRESENT;
+      audioPlaysInReceptor[DENY_ASSHOLE_2][DOWN][OFF][PRESENT] = true;
 
       videoPaths[i][DENY_ASSHOLE_3][DOWN][OFF][PRESENT] = "new_video/" + to_string(i) + "/deny_asshole_3.mp4";
       stateVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT] = true;
       nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].installationState = IDLE; nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].phoneState = DOWN;
       nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].lightState = OFF; nextStateIfVolatile[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].characterState = PRESENT;
-
+      audioPlaysInReceptor[DENY_ASSHOLE_3][DOWN][OFF][PRESENT] = true;
       
       videoPaths[i][IDLE][DOWN][OFF][WALK_IN] = "new_video/" + to_string(i) + "/idle_down_off_walk_in.mp4";
       stateVolatile[IDLE][DOWN][OFF][WALK_IN] = true;
