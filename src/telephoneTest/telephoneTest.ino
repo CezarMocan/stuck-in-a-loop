@@ -4,7 +4,7 @@ const int pulsePin =  2;
 int prevReadyState, prevPulseState;
 int digit, lastPulseCount;
 //reset
-const int resetPin = 4;
+const int resetPin = 5;
 int resetPinState, preResetPinState;
 char currentPhoneNumber[12];
 int currentDigitIndex = 0;
