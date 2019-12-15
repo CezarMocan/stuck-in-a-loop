@@ -42,7 +42,7 @@ class ofApp : public ofBaseApp{
         ofxButton startControlCenterButton;
         ofxTextField oscPortControlCenterTextField;
     
-        ofxTextField localIpTextField1, localIpTextField2;
+        ofxTextField localIpTextField1, localIpTextField2, infoTextField;
     
         void changedControlCenterOsc(string &text);
         map<string, string> init_controlCenterConfig;

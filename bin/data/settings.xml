@@ -1,2 +1,11 @@
 <?xml version="1.0"?>
 <group />
+<Regular_Client_Start_Panel>
+	<Network_Interface:_>en0</Network_Interface:_>
+	<UnknownName>Local IP: 10.18.91.94
+</UnknownName>
+	<OSC_Port:_>20000</OSC_Port:_>
+	<Host_IP:_>localhost</Host_IP:_>
+	<Host_Port:_>12345</Host_Port:_>
+	<Bliss:_0_|_Autumn:_1_|_Wind:_2_|_Azul:_3></Bliss:_0_|_Autumn:_1_|_Wind:_2_|_Azul:_3>
+</Regular_Client_Start_Panel>

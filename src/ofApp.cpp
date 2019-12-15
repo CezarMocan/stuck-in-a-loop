@@ -66,6 +66,8 @@ void ofApp::setupGUI() {
     
     clientIdRegularClientTextField.addListener(this, &ofApp::changedRegularClientClientId);
     guiRegularClient.add(clientIdRegularClientTextField.setup("Client Id:", "0"));
+    infoTextField.setSize(400, 20);
+    guiRegularClient.add(infoTextField.setup("Bliss: 0 | Autumn: 1 | Wind: 2 | Azul: 3", ""));
     
     startRegularClientButton.addListener(this, &ofApp::startAsRegularClientPressed);
     guiRegularClient.add(startRegularClientButton.setup("Connect"));
