@@ -113,7 +113,7 @@ class ofApp : public ofBaseApp{
         const int GSTATE_CALL_OUT_RING_TOO_MUCH_MS = 18000;
   
         int GSTATE_lastNonIdleTime = 1000000000;
-        const int GSTATE_IDLE_TO_ACTIVE_TIME = 25000;
+        const int GSTATE_IDLE_TO_ACTIVE_TIME = 10000;
   
         void serialReceived(char b);
   
