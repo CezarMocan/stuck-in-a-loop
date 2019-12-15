@@ -5,6 +5,7 @@
 //  Created by Cezar Mocan on 12/3/19.
 //
 
+#include <cmath>
 #include "InstanceStateManager.h"
 #include "Constants.h"
 
@@ -171,6 +172,10 @@ ofVideoPlayer InstanceStateManager::getVideoForCurrentState() {
     return videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
 }
 
+ofVideoPlayer InstanceStateManager::getVideoForNextState() {
+    return videos[nextVideoChannelState.installationState][nextVideoChannelState.phoneState][nextVideoChannelState.lightState][nextVideoChannelState.characterState];
+}
+
 void InstanceStateManager::updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c) {
     VideoChannelState vcs;
     vcs.installationState = i;
@@ -188,7 +193,7 @@ void InstanceStateManager::updateState(VideoChannelState vcs) {
   
     ofVideoPlayer oldVideo = currentlyPlayingVideo;
     currentlyPlayingVideo = getVideoForCurrentState();
-    currentlyPlayingVideo.play();
+    if (!currentlyPlayingVideo.isPlaying()) currentlyPlayingVideo.play();
     currentlyPlayingVideo.setVolume(1);
   
     if (!stateVolatile[vcs.installationState][vcs.phoneState][vcs.lightState][vcs.characterState]) {
@@ -210,19 +215,58 @@ void InstanceStateManager::updateState(VideoChannelState vcs) {
 void InstanceStateManager::update() {
   ofVideoPlayer currentVideo = getVideoForCurrentState();
   currentVideo.update();
-  if (currentVideoIsVolatile && currentVideo.getIsMovieDone()) {
-    VideoChannelState newState = nextStateIfVolatile[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
+  if (videoRenderingMode == CROSS_FADE) {
+    ofVideoPlayer nextVideo = getVideoForNextState();
+    nextVideo.update();
+  }
+  
+  int currentFrame = currentVideo.getCurrentFrame();
+  int totalFrames = currentVideo.getTotalNumFrames();
+  float position = currentVideo.getPosition();
+    
+  if (currentVideoIsVolatile && totalFrames - currentFrame <= 1) {
+    videoRenderingMode = NORMAL;
+    VideoChannelState newState = nextVideoChannelState;
     updateState(newState);
     this->app->sendStateUpdateUpstream(newState);
+  } else if (currentVideoIsVolatile && totalFrames - currentFrame <= CROSS_FADE_FRAMES) {
+    videoRenderingMode = CROSS_FADE;
+    nextVideoChannelState = nextStateIfVolatile[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
+    percentCrossFadeDone = 1.0 - ((totalFrames - currentFrame) * 1.0 / (CROSS_FADE_FRAMES * 1.0));
+    ofVideoPlayer nextVideo = getVideoForNextState();
+    if (!nextVideo.isPlaying()) nextVideo.play();
   }
 }
 
 void InstanceStateManager::draw() {
     bgImages[clientId].draw(0, 0, APP_WIDTH, APP_HEIGHT);
     ofVideoPlayer currentVideo = getVideoForCurrentState();
-//    ofEnableAlphaBlending();
-//    ofSetColor(255,255,255,100);
-    currentVideo.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+  
+    if (videoRenderingMode == CROSS_FADE) {
+      ofVideoPlayer nextVideo = getVideoForNextState();
+      
+      ofEnableAlphaBlending();
+      int alphaOld = (int) round(255 * (1 - percentCrossFadeDone));
+      int alphaNext = (int) round(255 * percentCrossFadeDone);
+      
+      if (alphaOld < 0 || alphaNext < 0) return;
+      
+      ofSetColor(255,255,255, alphaNext);
+      nextVideo.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+      
+      ofSetColor(255,255,255, alphaOld);
+      currentVideo.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+      
+      ofLogNotice() << alphaOld << " " << alphaNext << " " << percentCrossFadeDone;
+
+      ofDisableAlphaBlending();
+    } else {
+//      ofEnableAlphaBlending();
+//      ofSetColor(255,255,255,10);
+      currentVideo.draw(0, 0, APP_WIDTH, APP_HEIGHT);
+//      ofDisableAlphaBlending();
+    }
+  
 }
 
 

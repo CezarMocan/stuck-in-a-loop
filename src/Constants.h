@@ -47,4 +47,7 @@ const string IC_CLIENT_ID = "CLIENT_ID";
 
 const string PHONE_NUMBERS[4] = {"257", "963", "285", "286"};
 
+const int CROSS_FADE_FRAMES = 24;
+enum VIDEO_RENDERING_MODE { NORMAL, CROSS_FADE };
+
 #endif /* Constants_h */

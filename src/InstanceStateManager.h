@@ -17,6 +17,7 @@ class InstanceStateManager {
     public:
         InstanceStateManager(ofApp *app, int clientId);
         ofVideoPlayer getVideoForCurrentState();
+        ofVideoPlayer getVideoForNextState();
         void updateState(INSTALLATION_STATE i, PHONE_STATE p, LIGHT_STATE l, CHARACTER_STATE c);
         void updateState(VideoChannelState v);
   
@@ -43,6 +44,10 @@ class InstanceStateManager {
         ofImage bgImages[NO_CLIENTS];
   
         void loadVideos();
+  
+        VIDEO_RENDERING_MODE videoRenderingMode = NORMAL;
+        VideoChannelState nextVideoChannelState;
+        float percentCrossFadeDone = 0;
 };
 
 #endif /* InstanceStateManager_h */
