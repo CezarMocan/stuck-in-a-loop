@@ -45,7 +45,7 @@ const string IC_HOST_PORT = "HOST_PORT";
 const string IC_OSC_PORT = "OSC_PORT";
 const string IC_CLIENT_ID = "CLIENT_ID";
 
-const string PHONE_NUMBERS[4] = {"257", "963", "285", "286"};
+const string PHONE_NUMBERS[4] = {"257", "286", "963", "285"};
 
 const int CROSS_FADE_FRAMES = 24;
 enum VIDEO_RENDERING_MODE { NORMAL, CROSS_FADE };
