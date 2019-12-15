@@ -40,6 +40,8 @@ class InstanceStateManager {
         bool audioPlaysInReceptor[NO_INSTALLATION_STATES][NO_PHONE_STATES][NO_LIGHT_STATES][NO_CHARACTER_STATES];
         VideoChannelState nextStateIfVolatile[NO_INSTALLATION_STATES][NO_PHONE_STATES][NO_LIGHT_STATES][NO_CHARACTER_STATES];
   
+        ofImage bgImages[NO_CLIENTS];
+  
         void loadVideos();
 };
 

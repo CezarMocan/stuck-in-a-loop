@@ -9,8 +9,8 @@ int resetPinState, preResetPinState;
 char currentPhoneNumber[12];
 int currentDigitIndex = 0;
 // motor
-const int MOTOR_PIN = 10;
-//const int MOTOR_PIN = 11;
+//const int MOTOR_PIN = 10;
+const int MOTOR_PIN = 11;
 const int RELAY_PIN = 9;
 bool ringing = false, ringingState = true;
 int ringingTime;

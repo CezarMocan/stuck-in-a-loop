@@ -11,6 +11,10 @@
 InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
     this->app = app;
     this->clientId = clientId;
+  
+    for (int i = 0; i < NO_CLIENTS; i++) {
+      bgImages[i].load("img/" + to_string(i) + "/bg.png");
+    }
 
     for (int i = 0; i < NO_CLIENTS; i++) {
       videoPaths[i][IDLE][DOWN][OFF][ABSENT] = "new_video/" + to_string(i) + "/idle_down_off_absent.mp4";
@@ -143,7 +147,6 @@ InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
       stateVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT] = true;
       nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].installationState = IDLE; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].phoneState = DOWN;
       nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].lightState = OFF; nextStateIfVolatile[JANE_CALLING][DOWN][OFF][WALK_OUT].characterState = PRESENT;
-
     }
   
     loadVideos();
@@ -215,7 +218,10 @@ void InstanceStateManager::update() {
 }
 
 void InstanceStateManager::draw() {
+    bgImages[clientId].draw(0, 0, APP_WIDTH, APP_HEIGHT);
     ofVideoPlayer currentVideo = getVideoForCurrentState();
+//    ofEnableAlphaBlending();
+//    ofSetColor(255,255,255,100);
     currentVideo.draw(0, 0, APP_WIDTH, APP_HEIGHT);
 }
 
