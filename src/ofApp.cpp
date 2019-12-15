@@ -97,6 +97,9 @@ void ofApp::soundStopAll() {
   if (phoneAudios[ACTION_3][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_3][RINGING][ON][PRESENT].stop();
   if (phoneAudios[ACTION_4][RINGING][ON][PRESENT].isPlaying()) phoneAudios[ACTION_4][RINGING][ON][PRESENT].stop();
   if (phoneAudios[JANE_CALLING][UP][ON][PRESENT].isPlaying()) phoneAudios[JANE_CALLING][UP][ON][PRESENT].stop();
+  if (phoneAudios[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].isPlaying()) phoneAudios[DENY_ASSHOLE_1][DOWN][OFF][PRESENT].stop();
+  if (phoneAudios[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].isPlaying()) phoneAudios[DENY_ASSHOLE_2][DOWN][OFF][PRESENT].stop();
+  if (phoneAudios[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].isPlaying()) phoneAudios[DENY_ASSHOLE_3][DOWN][OFF][PRESENT].stop();
 }
 
 void ofApp::serialReceived(char b) {
