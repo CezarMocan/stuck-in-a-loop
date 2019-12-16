@@ -30,6 +30,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ofApp::danqiCallOut() [inlined]:ofApp.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "globalStateManager">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NetworkedClientRegularClient::update():NetworkedClientRegularClient.cpp">
+      </ContextState>
+      <ContextState
          contextName = "InstanceStateManager::loadVideos():InstanceStateManager.cpp">
          <PersistentStrings>
             <PersistentString
@@ -39,15 +50,45 @@
       </ContextState>
       <ContextState
          contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "isDownstream">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::danqiCallingOut():ControlCenterStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clientStates[0]">
+            </PersistentString>
+            <PersistentString
+               value = "clientStates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "InstanceStateManager::update():InstanceStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentVideoIsVolatile">
+            </PersistentString>
+            <PersistentString
+               value = "currentVideo">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ofApp::update():ofApp.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "phoneIsUp">
+               value = "currentPhoneNumber">
             </PersistentString>
             <PersistentString
-               value = "currentPhoneNumber">
+               value = "GSTATE_lastNonIdleTime">
+            </PersistentString>
+            <PersistentString
+               value = "phoneIsUp">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

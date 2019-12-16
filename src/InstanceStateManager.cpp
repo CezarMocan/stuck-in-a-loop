@@ -215,26 +215,33 @@ void InstanceStateManager::updateState(VideoChannelState vcs) {
 void InstanceStateManager::update() {
   ofVideoPlayer currentVideo = getVideoForCurrentState();
   currentVideo.update();
-  if (videoRenderingMode == CROSS_FADE) {
-    ofVideoPlayer nextVideo = getVideoForNextState();
-    nextVideo.update();
-  }
+//  if (videoRenderingMode == CROSS_FADE) {
+//    ofVideoPlayer nextVideo = getVideoForNextState();
+//    nextVideo.update();
+//  }
   
-  int currentFrame = currentVideo.getCurrentFrame();
-  int totalFrames = currentVideo.getTotalNumFrames();
-  float position = currentVideo.getPosition();
-    
-  if (currentVideoIsVolatile && totalFrames - currentFrame <= 1) {
-    videoRenderingMode = NORMAL;
-    VideoChannelState newState = nextVideoChannelState;
+//  int currentFrame = currentVideo.getCurrentFrame();
+//  int totalFrames = currentVideo.getTotalNumFrames();
+//  float position = currentVideo.getPosition();
+//
+//  if (currentVideoIsVolatile && totalFrames - currentFrame <= 1) {
+//    videoRenderingMode = NORMAL;
+//    VideoChannelState newState = nextVideoChannelState;
+//    updateState(newState);
+//    this->app->sendStateUpdateUpstream(newState);
+//  }
+//  else if (currentVideoIsVolatile && totalFrames - currentFrame <= CROSS_FADE_FRAMES) {
+//    videoRenderingMode = CROSS_FADE;
+//    nextVideoChannelState = nextStateIfVolatile[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
+//    percentCrossFadeDone = 1.0 - ((totalFrames - currentFrame) * 1.0 / (CROSS_FADE_FRAMES * 1.0));
+//    ofVideoPlayer nextVideo = getVideoForNextState();
+//    if (!nextVideo.isPlaying()) nextVideo.play();
+//  }
+
+  if (currentVideoIsVolatile && currentVideo.getIsMovieDone()) {
+    VideoChannelState newState = nextStateIfVolatile[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
     updateState(newState);
     this->app->sendStateUpdateUpstream(newState);
-  } else if (currentVideoIsVolatile && totalFrames - currentFrame <= CROSS_FADE_FRAMES) {
-    videoRenderingMode = CROSS_FADE;
-    nextVideoChannelState = nextStateIfVolatile[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState];
-    percentCrossFadeDone = 1.0 - ((totalFrames - currentFrame) * 1.0 / (CROSS_FADE_FRAMES * 1.0));
-    ofVideoPlayer nextVideo = getVideoForNextState();
-    if (!nextVideo.isPlaying()) nextVideo.play();
   }
 }
 
