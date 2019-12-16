@@ -12,6 +12,13 @@
 InstanceStateManager::InstanceStateManager(ofApp *app, int clientId) {
     this->app = app;
     this->clientId = clientId;
+    this->currentVideoIsVolatile = false;
+  
+    for (int i = 0; i < NO_INSTALLATION_STATES; i++)
+      for (int j = 0; j < NO_PHONE_STATES; j++)
+        for (int k = 0; k < NO_LIGHT_STATES; k++)
+          for (int l = 0; l < NO_CHARACTER_STATES; l++)
+            stateVolatile[i][j][k][l] = false;
   
     for (int i = 0; i < NO_CLIENTS; i++) {
       bgImages[i].load("img/" + to_string(i) + "/bg.png");

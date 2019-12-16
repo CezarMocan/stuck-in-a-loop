@@ -34,13 +34,14 @@ class ControlCenterStateManager {
   
     void update(int currentTime);
   
+    int getCurrentClientWithCharacter();
+  
   private:
     NetworkedClientControlCenter *networkClient;
     map<int, VideoChannelState> clientStates;
   
     void autoAdvanceGlobalState(int clientId, VideoChannelState oldState, VideoChannelState newState);
     int getNextActiveClientId(int clientId);
-    int getCurrentClientWithCharacter();
   
     StateTimer* timer;
   

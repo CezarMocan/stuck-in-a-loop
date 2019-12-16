@@ -28,6 +28,11 @@ void ofApp::setup(){
     dialTone.load("audio/tone2.mp3");
     ringingTone.load("audio/telephone_dial_tone.mp3");
     busyTone.load("audio/telephone_end_state.mp3");
+  
+    GSTATE_isPhoneRinging = false;
+    GSTATE_callOutInitTime = -1;
+    GSTATE_isCallingOut = false;
+    GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
 }
 
 void ofApp::setupGUI() {
@@ -387,6 +392,8 @@ void ofApp::controlCenterReceivedUpstreamSoundNotice(int clientId, VideoChannelS
 }
 
 void ofApp::danqiCallOut() {
+  int currClient = globalStateManager->getCurrentClientWithCharacter();
+  if (currClient == -1) return;
   GSTATE_isCallingOut = true;
   GSTATE_callOutInitTime = ofGetElapsedTimeMillis();
   globalStateManager->danqiCallingOut();
@@ -405,8 +412,10 @@ void ofApp::keyPressed(int key){
     }
 
     VideoChannelState newState;
+    newState.installationState = IDLE;
     newState.phoneState = DOWN;
     newState.lightState = OFF;
+    newState.characterState = ABSENT;
     globalStateManager->moveClientToState(clientId, newState);
   }
   if (key == '2' || key == 'w' || key == 's' || key == 'x') {

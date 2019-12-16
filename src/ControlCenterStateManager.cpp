@@ -272,9 +272,10 @@ INSTALLATION_STATE ControlCenterStateManager::getNextDenyWrong() {
 
 bool ControlCenterStateManager::isIdle() {
   int clientId = getCurrentClientWithCharacter();
-  if (clientId == -1) return;
+  if (clientId == -1) return false;
   
   for (int i = 0; i < NO_CLIENTS; i++) {
+    if (clientStates.find(i) == clientStates.end()) continue;
     VideoChannelState c = clientStates[i];
     if (i == clientId) {
       if (c.installationState == IDLE && c.lightState == OFF && c.phoneState == DOWN && c.characterState == PRESENT) {
@@ -283,7 +284,6 @@ bool ControlCenterStateManager::isIdle() {
         return false;
       }
     } else {
-      
       if (c.installationState == IDLE && c.lightState == OFF && c.phoneState == DOWN && c.characterState == ABSENT) {
         continue;
       } else {

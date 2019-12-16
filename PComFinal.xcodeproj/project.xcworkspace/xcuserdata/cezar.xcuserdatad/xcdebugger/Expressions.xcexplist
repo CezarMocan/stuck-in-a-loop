@@ -3,42 +3,29 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "ControlCenterStateManager::userCalledClient(int):ControlCenterStateManager.cpp">
+         contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "clientStates">
+               value = "isDownstream">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "InstanceStateManager::updateState(VideoChannelState):InstanceStateManager.cpp">
+         contextName = "ofApp::update():ofApp.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ControlCenterStateManager::getCurrentClientWithCharacter():ControlCenterStateManager.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "clientStates">
+               value = "GSTATE_lastNonIdleTime">
             </PersistentString>
             <PersistentString
-               value = "clientStates[i].characterState">
+               value = "phoneIsUp">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ofApp::danqiCallOut() [inlined]:ofApp.cpp">
-         <PersistentStrings>
             <PersistentString
-               value = "globalStateManager">
+               value = "currentPhoneNumber">
+            </PersistentString>
+            <PersistentString
+               value = "GSTATE_isCallingOut">
             </PersistentString>
          </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NetworkedClientRegularClient::update():NetworkedClientRegularClient.cpp">
       </ContextState>
       <ContextState
          contextName = "InstanceStateManager::loadVideos():InstanceStateManager.cpp">
@@ -49,12 +36,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ControlCenterStateManager::moveClientToState(int, VideoChannelState, bool):ControlCenterStateManager.cpp">
-         <PersistentStrings>
-            <PersistentString
-               value = "isDownstream">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "NetworkedClientRegularClient::update():NetworkedClientRegularClient.cpp">
       </ContextState>
       <ContextState
          contextName = "ControlCenterStateManager::danqiCallingOut():ControlCenterStateManager.cpp">
@@ -62,6 +44,14 @@
             <PersistentString
                value = "clientStates[0]">
             </PersistentString>
+            <PersistentString
+               value = "clientStates">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::userCalledClient(int):ControlCenterStateManager.cpp">
+         <PersistentStrings>
             <PersistentString
                value = "clientStates">
             </PersistentString>
@@ -79,21 +69,40 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ofApp::update():ofApp.cpp">
+         contextName = "InstanceStateManager::updateState(VideoChannelState):InstanceStateManager.cpp">
          <PersistentStrings>
             <PersistentString
-               value = "currentPhoneNumber">
+               value = "videos[videoChannelState.installationState][videoChannelState.phoneState][videoChannelState.lightState][videoChannelState.characterState]">
             </PersistentString>
             <PersistentString
-               value = "GSTATE_lastNonIdleTime">
+               value = "currentVideoIsVolatile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::getCurrentClientWithCharacter():ControlCenterStateManager.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "clientStates">
             </PersistentString>
             <PersistentString
-               value = "phoneIsUp">
+               value = "clientStates[i].characterState">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "ofApp::controlCenterReceivedUpstreamUpdate(int, VideoChannelState):ofApp.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "ofApp::danqiCallOut() [inlined]:ofApp.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "globalStateManager">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ControlCenterStateManager::isIdle():ControlCenterStateManager.cpp">
       </ContextState>
    </ContextStates>
 </VariablesViewState>
