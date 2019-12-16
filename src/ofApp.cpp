@@ -113,6 +113,9 @@ void ofApp::serialReceived(char b) {
         phoneIsUp = false;
         soundStopAll();
         GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
+        GSTATE_isPhoneRinging = false;
+        GSTATE_isCallingOut = false;
+        GSTATE_callOutInitTime = -1;
         serialManager.writeByte('p');
         break;
       case 's':
@@ -180,7 +183,7 @@ void ofApp::resetAll() {
   GSTATE_isCallingOut = false;
   GSTATE_isPhoneRinging = false;
   GSTATE_callOutInitTime = -1;
-  GSTATE_lastNonIdleTime = 1000000000;
+  GSTATE_lastNonIdleTime = ofGetElapsedTimeMillis();
 }
 
 //--------------------------------------------------------------
@@ -201,12 +204,15 @@ void ofApp::update(){
       }
     }
   
-    if (!serialManager.isInitialized()) return;
+//    if (!serialManager.isInitialized()) return;
   
     if (client->isControlCenter()) {
-      while (serialManager.available()) {
-        char b = serialManager.readByte();
-        serialReceived(b);
+        
+      if (serialManager.isInitialized()) {
+        while (serialManager.available()) {
+            char b = serialManager.readByte();
+            serialReceived(b);
+        }
       }
     
       int currTime = ofGetElapsedTimeMillis();
@@ -223,14 +229,14 @@ void ofApp::update(){
       } else if (!phoneIsUp && GSTATE_isCallingOut && !GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_DELAY_MS) {
         // Installation auto-adjustment: once Danqi has called out, play the real-life phone ringer once the video gets to the right spot.
         GSTATE_isPhoneRinging = true;
-        serialManager.writeByte('i');
+        if (serialManager.isInitialized()) serialManager.writeByte('i');
       } else if (!phoneIsUp && GSTATE_isCallingOut && GSTATE_isPhoneRinging && currTime - GSTATE_callOutInitTime > GSTATE_CALL_OUT_RING_TOO_MUCH_MS) {
         // Installation auto-adjustment: We've called enough with no response, hang up and go back to regular state.
         GSTATE_isPhoneRinging = false;
         GSTATE_callOutInitTime = -1;
         GSTATE_isCallingOut = false;
         globalStateManager->danqiCallingOutHangUp();
-        serialManager.writeByte('o');
+        if (serialManager.isInitialized()) serialManager.writeByte('o');
       } else {
       
       }

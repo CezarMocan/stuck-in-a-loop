@@ -14,8 +14,15 @@
 //#define APP_WIDTH 1280
 //#define APP_HEIGHT 720
 
-#define APP_WIDTH 1366
-#define APP_HEIGHT 768
+//#define APP_WIDTH 1366
+//#define APP_HEIGHT 768
+
+//#define APP_WIDTH 683
+//#define APP_HEIGHT 384
+
+const int APP_WIDTH = 683;
+const int APP_HEIGHT = 384;
+
 
 #define NO_CLIENTS 4
 #define NO_INSTALLATION_STATES 12
